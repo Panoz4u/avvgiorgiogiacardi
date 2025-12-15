@@ -60,7 +60,7 @@
   },
   "scripts": {
     "start": "craco start",
-    "build": "DISABLE_ESLINT_PLUGIN=true craco build",
+    "build": "set \"DISABLE_ESLINT_PLUGIN=true\" && craco build",
     "test": "craco test"
   },
   "browserslist": {

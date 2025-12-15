@@ -1,96 +1,63 @@
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import React from 'react';
+import { motion } from 'framer-motion';
+
+const items = [
+  { id: '01', title: 'Internazionale', subtitle: 'Esperienza legale Italia–Francia' },
+  { id: '02', title: 'Affidabile', subtitle: 'Competenza al servizio del cliente' },
+  { id: '03', title: 'Umano', subtitle: 'Empatia guidata dalla strategia' },
+];
 
 const WhyChooseUs = ({ lang }) => {
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"]
-  });
-
-  // REWRITE FROM SCRATCH
-  // We use a very tall container to allow for slow scrolling
-  // 4 "Pages": Intro -> Card 1 -> Card 2 -> Card 3
-  
-  // Transform Ranges
-  // Intro stays visible until 25%, then gets covered
-  // Card 1 comes in from bottom at 15% -> settles at 35%
-  // Card 2 comes in from bottom at 40% -> settles at 60%
-  // Card 3 comes in from bottom at 65% -> settles at 85%
-
-  const y1 = useTransform(scrollYProgress, [0.15, 0.35], ["100%", "0%"]);
-  const y2 = useTransform(scrollYProgress, [0.40, 0.60], ["100%", "0%"]);
-  const y3 = useTransform(scrollYProgress, [0.65, 0.85], ["100%", "0%"]);
+  const headlineTop = lang === 'fr' ? 'VOTRE DÉFENSE,' : 'LA TUA DIFESA,';
+  const headlineBottom = lang === 'fr' ? 'SANS FRONTIÈRES.' : 'SENZA CONFINI.';
 
   return (
-    <section ref={containerRef} className="relative h-[500vh] bg-[var(--bg-primary)]">
-      
-      {/* Sticky Frame */}
-      <div className="sticky top-0 h-screen w-full overflow-hidden">
-
-        {/* --- BASE LAYER: INTRO (NAVY) --- */}
-        <div className="absolute inset-0 w-full h-full bg-[#050A14] flex items-center justify-center p-6 z-0">
-          <div className="text-center w-full">
-            <h2 className="text-[10vw] font-display font-black text-white leading-[0.9] uppercase">
-              {lang === 'it' ? 'LA TUA DIFESA,' : 'VOTRE DÉFENSE,'} <br />
-              <span className="text-white/50">
-                {lang === 'it' ? 'SENZA CONFINI.' : 'SANS FRONTIÈRES.'}
-              </span>
-            </h2>
-            <div className="mt-12 text-white/30 animate-bounce">
-              ↓ SCROLL
-            </div>
-          </div>
+    <section className="bg-[var(--bg-primary)]">
+      {/* Intro */}
+      <div className="flex items-center justify-center min-h-[70vh] px-6 py-16 md:py-24">
+        <div className="text-center">
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
+            viewport={{ once: true, amount: 0.6 }}
+            className="text-[12vw] md:text-[8vw] leading-[0.9] font-display font-black uppercase text-white"
+          >
+            {headlineTop}
+            <br />
+            <span className="text-white/50">{headlineBottom}</span>
+          </motion.h2>
         </div>
+      </div>
 
-        {/* --- CARD 1: INTERNATIONAL (BLUE) --- */}
-        <motion.div 
-          style={{ y: y1 }}
-          className="absolute inset-0 w-full h-full z-10"
-        >
-          <div className="w-full h-full bg-[#0056D2] flex flex-col items-center justify-center p-8 text-center shadow-[0_-50px_100px_rgba(0,0,0,0.5)]">
-             <span className="text-[20vw] font-display font-black text-white/10 absolute top-[-5vw] left-[-2vw]">01</span>
-             <h3 className="text-[8vw] md:text-[6vw] font-display font-bold text-white uppercase leading-none mb-6 relative z-10">
-               {lang === 'it' ? "Internazionalità" : "International"}
-             </h3>
-             <p className="text-xl md:text-3xl text-white font-light tracking-widest border-t border-white/30 pt-6 inline-block">
-               {lang === 'it' ? "Esperienza IT/FR" : "Expertise IT/FR"}
-             </p>
-          </div>
-        </motion.div>
+      {/* Blocchi full-width, uno dopo l'altro */}
+      <div className="space-y-0">
+        {items.map((item, index) => (
+          <motion.div
+            key={item.id}
+            initial={{ opacity: 0, y: 60 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: index * 0.1, ease: 'easeOut' }}
+            viewport={{ once: true, amount: 0.35 }}
+            className="relative min-h-screen flex items-center bg-gradient-to-br from-[#0b60ff] via-[#0056d2] to-[#003b99] px-6 md:px-16 py-16 md:py-24 overflow-hidden"
+          >
+            <div className="absolute inset-0 opacity-15 mix-blend-screen bg-[radial-gradient(circle_at_40%_40%,#fff,transparent_35%)]" />
+            <div className="absolute inset-0 opacity-20 mix-blend-multiply bg-[radial-gradient(circle_at_80%_60%,#000,transparent_45%)]" />
 
-        {/* --- CARD 2: PROFESSIONAL (BLUE) --- */}
-        <motion.div 
-          style={{ y: y2 }}
-          className="absolute inset-0 w-full h-full z-20"
-        >
-          <div className="w-full h-full bg-[#0056D2] flex flex-col items-center justify-center p-8 text-center shadow-[0_-50px_100px_rgba(0,0,0,0.5)] border-t border-white/10">
-             <span className="text-[20vw] font-display font-black text-white/10 absolute top-[-5vw] right-[-2vw]">02</span>
-             <h3 className="text-[8vw] md:text-[6vw] font-display font-bold text-white uppercase leading-none mb-6 relative z-10">
-               {lang === 'it' ? "Professionalità" : "Professionnalisme"}
-             </h3>
-             <p className="text-xl md:text-3xl text-white font-light tracking-widest border-t border-white/30 pt-6 inline-block">
-               {lang === 'it' ? "Al servizio del cliente" : "Au service du client"}
-             </p>
-          </div>
-        </motion.div>
+            <div className="relative z-10 w-full max-w-7xl text-white flex flex-col gap-4">
+              <h3 className="text-5xl md:text-7xl font-display font-black uppercase tracking-tight">
+                {item.title}
+              </h3>
+              <p className="text-xl md:text-2xl font-light tracking-wide">
+                {item.subtitle}
+              </p>
+            </div>
 
-        {/* --- CARD 3: HUMAN (BLUE) --- */}
-        <motion.div 
-          style={{ y: y3 }}
-          className="absolute inset-0 w-full h-full z-30"
-        >
-          <div className="w-full h-full bg-[#0056D2] flex flex-col items-center justify-center p-8 text-center shadow-[0_-50px_100px_rgba(0,0,0,0.5)] border-t border-white/10">
-             <span className="text-[20vw] font-display font-black text-white/10 absolute bottom-[-5vw] left-[-2vw]">03</span>
-             <h3 className="text-[8vw] md:text-[6vw] font-display font-bold text-white uppercase leading-none mb-6 relative z-10">
-               {lang === 'it' ? "Rapporti Umani" : "Relations Humaines"}
-             </h3>
-             <p className="text-xl md:text-3xl text-white font-light tracking-widest border-t border-white/30 pt-6 inline-block">
-               {lang === 'it' ? "Empatia & Strategia" : "Empathie & Stratégie"}
-             </p>
-          </div>
-        </motion.div>
-
+            <span className="absolute top-1/2 right-[-6vw] md:right-[-8vw] -translate-y-1/2 text-[60vw] md:text-[32vw] font-display font-black text-white/20 leading-none select-none">
+              {item.id}
+            </span>
+          </motion.div>
+        ))}
       </div>
     </section>
   );
