@@ -1,21 +1,21 @@
 from fastapi import FastAPI, APIRouter, HTTPException
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
-from motor.motor_asyncio import AsyncIOMotorClient
 import os
 import logging
 from pathlib import Path
 from pydantic import BaseModel, EmailStr
 from typing import Optional
 from datetime import datetime
+from supabase import create_client, Client
 
-ROOT_DIR = Path(__file__).parent
+ROOT_DIR = Path(__file__).parent.parent
 load_dotenv(ROOT_DIR / '.env')
 
-# MongoDB connection
-mongo_url = os.environ.get('MONGO_URL', 'mongodb://localhost:27017')
-client = AsyncIOMotorClient(mongo_url)
-db = client[os.environ.get('DB_NAME', 'lawfirm_db')]
+# Supabase connection
+supabase_url = os.environ.get('VITE_SUPABASE_URL')
+supabase_key = os.environ.get('VITE_SUPABASE_ANON_KEY')
+supabase: Client = create_client(supabase_url, supabase_key)
 
 # Create the main app without a prefix
 app = FastAPI()
@@ -44,15 +44,15 @@ async def root():
 @api_router.post("/contact", response_model=ContactResponse)
 async def submit_contact(form: ContactForm):
     try:
-        # Save to database
+        # Save to Supabase database
         contact_dict = form.dict()
-        result = await db.contacts.insert_one(contact_dict)
-        
+        result = supabase.table('contacts').insert(contact_dict).execute()
+
         logger.info(f"New contact received from {form.email}: {form.message[:50]}...")
-        
+
         # Here we would integrate SendGrid/Mailgun in a real production env
         # For MVP, we confirm storage
-        
+
         return ContactResponse(
             status="success",
             message="Your message has been sent successfully." if form.lang == 'en' else "Il tuo messaggio è stato inviato con successo."
@@ -78,7 +78,3 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
-
-@app.on_event("shutdown")
-async def shutdown_db_client():
-    client.close()

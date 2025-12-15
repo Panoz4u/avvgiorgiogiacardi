@@ -1,0 +1,22 @@
+{
+  "name": "lawfirm-monviso",
+  "version": "1.0.0",
+  "description": "Law Firm website with React frontend and backend API",
+  "scripts": {
+    "install": "cd frontend && npm install",
+    "build": "cd frontend && npm run build",
+    "start": "cd frontend && npm start",
+    "test": "cd frontend && npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [
+    "lawfirm",
+    "react",
+    "fastapi"
+  ],
+  "author": "",
+  "license": "MIT"
+}
