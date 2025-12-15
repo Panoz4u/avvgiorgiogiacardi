@@ -5,25 +5,15 @@ const WhyChooseUs = ({ lang }) => {
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start start", "end end"]
+    offset: ["start end", "end start"]
   });
 
-  // REWRITE FROM SCRATCH
-  // We use a very tall container to allow for slow scrolling
-  // 4 "Pages": Intro -> Card 1 -> Card 2 -> Card 3
-  
-  // Transform Ranges
-  // Intro stays visible until 25%, then gets covered
-  // Card 1 comes in from bottom at 15% -> settles at 35%
-  // Card 2 comes in from bottom at 40% -> settles at 60%
-  // Card 3 comes in from bottom at 65% -> settles at 85%
-
-  const y1 = useTransform(scrollYProgress, [0.15, 0.35], ["100%", "0%"]);
-  const y2 = useTransform(scrollYProgress, [0.40, 0.60], ["100%", "0%"]);
-  const y3 = useTransform(scrollYProgress, [0.65, 0.85], ["100%", "0%"]);
+  const y1 = useTransform(scrollYProgress, [0.15, 0.30], ["100%", "0%"]);
+  const y2 = useTransform(scrollYProgress, [0.35, 0.55], ["100%", "0%"]);
+  const y3 = useTransform(scrollYProgress, [0.60, 0.80], ["100%", "0%"]);
 
   return (
-    <section ref={containerRef} className="relative h-[500vh] bg-[var(--bg-primary)]">
+    <section ref={containerRef} className="relative h-[350vh] bg-[var(--bg-primary)]">
       
       {/* Sticky Frame */}
       <div className="sticky top-0 h-screen w-full overflow-hidden">
@@ -31,15 +21,12 @@ const WhyChooseUs = ({ lang }) => {
         {/* --- BASE LAYER: INTRO (NAVY) --- */}
         <div className="absolute inset-0 w-full h-full bg-[#050A14] flex items-center justify-center p-6 z-0">
           <div className="text-center w-full">
-            <h2 className="text-[10vw] font-display font-black text-white leading-[0.9] uppercase">
+            <h2 className="text-[10vw] md:text-[8vw] font-display font-black text-white leading-[0.9] uppercase">
               {lang === 'it' ? 'LA TUA DIFESA,' : 'VOTRE DÉFENSE,'} <br />
               <span className="text-white/50">
                 {lang === 'it' ? 'SENZA CONFINI.' : 'SANS FRONTIÈRES.'}
               </span>
             </h2>
-            <div className="mt-12 text-white/30 animate-bounce">
-              ↓ SCROLL
-            </div>
           </div>
         </div>
 
