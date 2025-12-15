@@ -2,6 +2,27 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const WhyChooseUs = ({ lang }) => {
+  const points = [
+    { title: "International", desc: "Expertise IT/FR" },
+    { title: "Digital First", desc: "Remote & Tech Savvy" },
+    { title: "Human Centric", desc: "Empathy & Strategy" }
+  ];
+
+  const containerVars = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.3
+      }
+    }
+  };
+
+  const itemVars = {
+    hidden: { x: -50, opacity: 0 },
+    show: { x: 0, opacity: 1, transition: { type: "spring", stiffness: 100 } }
+  };
+
   return (
     <section id="why-us" className="py-32 bg-[var(--bg-primary)] border-y border-white/5 overflow-hidden">
       <div className="container mx-auto px-6">
@@ -31,14 +52,17 @@ const WhyChooseUs = ({ lang }) => {
                   : 'Une approche moderne alliant tradition juridique et rapidité numérique. Nous parlons votre langue, où que vous soyez.'}
               </p>
               
-              <div className="space-y-8">
-                {[
-                  { title: "International", desc: "Expertise IT/FR" },
-                  { title: "Digital First", desc: "Remote & Tech Savvy" },
-                  { title: "Human Centric", desc: "Empathy & Strategy" }
-                ].map((item, i) => (
+              <motion.div 
+                variants={containerVars}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+                className="space-y-8"
+              >
+                {points.map((item, i) => (
                   <motion.div 
                     key={i}
+                    variants={itemVars}
                     whileHover={{ x: 20 }}
                     className="flex items-center gap-6 group cursor-default"
                   >
@@ -51,15 +75,19 @@ const WhyChooseUs = ({ lang }) => {
                     </div>
                   </motion.div>
                 ))}
-              </div>
+              </motion.div>
             </div>
 
-            {/* Visual Abstract Element */}
+            {/* Visual Abstract Animation - Smooth Loop */}
             <div className="relative hidden lg:flex items-center justify-center">
-              <div className="w-[400px] h-[400px] border border-white/10 rounded-full flex items-center justify-center animate-slow-spin">
-                <div className="w-[300px] h-[300px] border border-[var(--brand-primary)]/30 rounded-full flex items-center justify-center">
-                   <div className="w-[100px] h-[100px] bg-[var(--brand-primary)] blur-[80px]"></div>
-                </div>
+              <div className="relative w-full h-[500px]">
+                {/* Animated Gradient Mesh / Flow */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-[var(--brand-primary)]/20 via-blue-900/10 to-transparent rounded-full filter blur-[80px] animate-float"></div>
+                <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-[var(--brand-primary)] rounded-full mix-blend-screen filter blur-[60px] animate-float" style={{ animationDelay: '1s' }}></div>
+                <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-blue-600 rounded-full mix-blend-screen filter blur-[80px] animate-float" style={{ animationDelay: '2.5s' }}></div>
+                
+                {/* Subtle Grid Lines */}
+                <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
               </div>
             </div>
           </div>

@@ -27,7 +27,9 @@ const Locations = ({ lang }) => {
               <p className="text-2xl text-gray-300 font-light">Trinità (Cuneo)</p>
               <p className="text-gray-500 mt-2">Via Stazione 32</p>
               <motion.a 
-                href="#" 
+                href="https://share.google/JLiYCPUmPk0BX7KAz"
+                target="_blank"
+                rel="noopener noreferrer" 
                 className="inline-block mt-6 text-white border-b border-white pb-1 hover:text-[var(--brand-primary)] hover:border-[var(--brand-primary)] transition-colors"
                 whileHover={{ x: 10 }}
               >
@@ -51,7 +53,9 @@ const Locations = ({ lang }) => {
               <p className="text-2xl text-gray-300 font-light">Paris (75019)</p>
               <p className="text-gray-500 mt-2">20 Rue Manin</p>
               <motion.a 
-                href="#" 
+                href="https://share.google/N0mDgUICZD7DOIrja"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-block mt-6 text-white border-b border-white pb-1 hover:text-[var(--brand-primary)] hover:border-[var(--brand-primary)] transition-colors"
                 whileHover={{ x: 10 }}
               >

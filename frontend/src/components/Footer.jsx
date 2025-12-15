@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 
 const Footer = () => {
   return (
@@ -11,14 +10,13 @@ const Footer = () => {
                GIACARDI
              </h2>
              <div className="text-xl text-gray-400 font-light relative z-10 mb-8">
-               © {new Date().getFullYear()} Studio Legale Giacardi.
+               © Solo Studio legale Giacardi.
              </div>
           </div>
           
           <div className="flex flex-col gap-4 text-right z-10">
-            <a href="#" className="text-2xl text-white hover:text-[var(--brand-primary)] font-bold transition-colors">LinkedIn</a>
-            <a href="#" className="text-2xl text-white hover:text-[var(--brand-primary)] font-bold transition-colors">Instagram</a>
-            <a href="mailto:avv..." className="text-2xl text-white hover:text-[var(--brand-primary)] font-bold transition-colors">Email</a>
+            <a href="https://www.linkedin.com/in/giorgio-giacardi-67ba295a/" target="_blank" rel="noopener noreferrer" className="text-2xl text-white hover:text-[var(--brand-primary)] font-bold transition-colors">LinkedIn</a>
+            <a href="mailto:avvgiorgiogiacardi@gmail.com" className="text-2xl text-white hover:text-[var(--brand-primary)] font-bold transition-colors">Email</a>
           </div>
         </div>
       </div>

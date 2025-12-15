@@ -28,7 +28,7 @@ const About = ({ lang }) => {
   return (
     <section id="about" className="py-32 bg-[var(--bg-primary)] relative border-t border-white/5">
       <div className="container mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-20 items-end">
+        <div className="grid lg:grid-cols-2 gap-20 items-center">
           
           <motion.div 
             initial={{ opacity: 0, y: 50 }}
@@ -56,7 +56,7 @@ const About = ({ lang }) => {
             </div>
           </motion.div>
 
-          {/* Image / Visual Block */}
+          {/* Video / Visual Block */}
           <motion.div 
             initial={{ scale: 0.9, opacity: 0 }}
             whileInView={{ scale: 1, opacity: 1 }}
@@ -64,10 +64,25 @@ const About = ({ lang }) => {
             transition={{ duration: 0.8 }}
             className="relative h-[600px] w-full bg-[#0a0f1d] border border-white/5 overflow-hidden group"
           >
-             {/* Placeholder for Profile - Creative Style */}
-             <div className="absolute inset-0 bg-gradient-to-tr from-[var(--brand-primary)]/20 to-transparent opacity-50 group-hover:opacity-80 transition-opacity duration-500"></div>
+             {/* Profile Video Background */}
+             <div className="absolute inset-0 w-full h-full">
+               <video 
+                 autoPlay 
+                 loop 
+                 muted 
+                 playsInline
+                 className="w-full h-full object-cover"
+               >
+                 <source src="https://customer-assets.emergentagent.com/job_alpine-attorney/artifacts/k2kbkaa8_grok-video-a598e25c-a974-4d38-af49-1ee62690fd2d.mp4" type="video/mp4" />
+               </video>
+             </div>
+
+             {/* Blue Opacity Overlay */}
+             <div className="absolute inset-0 bg-[var(--brand-primary)]/40 mix-blend-multiply opacity-80 group-hover:opacity-60 transition-opacity duration-500"></div>
+             
+             {/* GG Text Overlay */}
              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-[200px] font-display font-black text-white/5 group-hover:text-white/10 transition-colors duration-500 select-none">
+                <span className="text-[200px] font-display font-black text-white/20 group-hover:text-white/40 transition-colors duration-500 select-none">
                   GG
                 </span>
              </div>
