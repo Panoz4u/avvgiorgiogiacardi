@@ -5,11 +5,14 @@
 
 ## Recent Tests
 - Date: 2025-08-XX
-- Component: Animation V4 (Pixels & Parallax)
+- Component: Animation Final V5 (Card Deck)
 - Status: **PASSED**
 - Notes:
-    - **"Why Us"**: Implemented "Big Pixel Grid" animation. The grid scales up and fades in, creating a transition from Navy to Electric Blue.
-    - **Cards Stack**: The 3 cards (01, 02, 03) now parallax stack on top of each other after the pixel transition.
-    - **Contact**: Fixed mobile font size using fluid `text-[13vw]` and translated all form labels.
-    - **Footer**: Reverted to huge Marquee background as requested ("Avvocato Giorgio Giacardi" scrolling slowly). Links stay on top.
-    - **Hero**: Fixed ticker overlap by ensuring flex container and proper spacing/duplication.
+    - **"Why Us"**: Completely rewritten to use a "Sticky Deck" transition.
+        - Scroll 0-25%: Intro Title "SENZA CONFINI" (Navy).
+        - Scroll >25%: Card 01 (Electric Blue) slides UP over Intro.
+        - Scroll >50%: Card 02 (Electric Blue) slides UP over Card 01.
+        - Scroll >75%: Card 03 (Electric Blue) slides UP over Card 02.
+    - **Parallax**: Added slight scale-down effect (`scale: 0.9`) for background cards to create depth.
+    - **Contact**: Fixed "PARLIAMONE" overflow using `break-words` and fluid typography.
+    - **Hero Ticker**: Fixed overlapping text by using a proper flex container structure (`w-max` + duplicate groups).
