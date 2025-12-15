@@ -1,1 +1,12 @@
-/* Cleared to avoid conflicts with Tailwind */
+/* Global Overflow Fix for Mobile */
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+}
+
+/* Ensure no elements cause horizontal scroll */
+* {
+  max-width: 100vw;
+  box-sizing: border-box;
+}
