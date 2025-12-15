@@ -1,71 +1,119 @@
 import React from 'react';
-import Spline from '@splinetool/react-spline';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 const Hero = ({ lang }) => {
+  const { scrollY } = useScroll();
+  const y1 = useTransform(scrollY, [0, 500], [0, 200]);
+  const y2 = useTransform(scrollY, [0, 500], [0, -150]);
+
   return (
-    <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
-      <div className="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center relative z-10">
-        
-        {/* Left Content */}
-        <motion.div 
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="order-2 md:order-1"
-        >
-          <h2 className="text-[var(--brand-primary)] font-mono mb-4 text-lg tracking-widest">
-            {lang === 'it' ? 'AVVOCATO' : 'AVOCAT'}
-          </h2>
-          <h1 className="text-5xl md:text-7xl font-serif font-bold leading-tight mb-6">
-            GIORGIO <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">
-              GIACARDI
-            </span>
-          </h1>
-          
-          <div className="h-1 w-24 bg-[var(--brand-primary)] mb-8"></div>
-          
-          <p className="text-xl text-gray-400 italic font-serif mb-10 max-w-lg border-l-2 border-[var(--brand-primary)] pl-6">
-            "Fiat iustitia, ruat caelum"
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4">
-            <a href="#contact" className="btn-primary justify-center">
-              {lang === 'it' ? 'Richiedi Consulenza' : 'Demander Consultation'}
-            </a>
-            <a href="#areas" className="btn-secondary justify-center">
-              {lang === 'it' ? 'Aree di Attività' : 'Domaines d\'Activité'}
-            </a>
-          </div>
-        </motion.div>
-
-        {/* Right Content - Spline 3D */}
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.5 }}
-          className="order-1 md:order-2 h-[50vh] md:h-[80vh] w-full relative"
-        >
-           {/* Using the requested Neon Balls Spline scene */}
-           <div className="absolute inset-0 w-full h-full">
-             <Spline scene="https://prod.spline.design/NbVmy6DPLhY-5Lvg/scene.splinecode" />
-           </div>
-           {/* Gradient overlay to blend spline into background if needed */}
-           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[var(--bg-primary)] pointer-events-none"></div>
-        </motion.div>
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[var(--bg-primary)] pt-20">
+      
+      {/* Background Atmosphere - Smooth & Deep */}
+      <div className="absolute inset-0 w-full h-full overflow-hidden">
+        <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] bg-[var(--brand-primary)] rounded-full mix-blend-screen filter blur-[120px] opacity-20 animate-float"></div>
+        <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-blue-900 rounded-full mix-blend-screen filter blur-[120px] opacity-20 animate-float" style={{ animationDelay: '2s' }}></div>
       </div>
 
-      {/* Scroll Indicator */}
-      <motion.div 
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.5, duration: 1, repeat: Infinity, repeatType: "reverse" }}
-        className="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-gray-500"
-      >
-        <div className="w-[1px] h-16 bg-gradient-to-b from-[var(--brand-primary)] to-transparent mx-auto"></div>
-        <span className="text-xs uppercase tracking-widest mt-2 block">Scroll</span>
-      </motion.div>
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="flex flex-col items-center text-center">
+          
+          {/* Top Label */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="mb-6 overflow-hidden"
+          >
+            <span className="inline-block px-4 py-1 border border-white/20 rounded-full text-sm font-bold tracking-[0.2em] uppercase text-blue-300 backdrop-blur-sm">
+              {lang === 'it' ? 'Studio Legale Internazionale' : 'Cabinet d\'Avocats International'}
+            </span>
+          </motion.div>
+
+          {/* Main Title - HUGE & BOLD (Agrandir style) */}
+          <div className="relative">
+            <motion.h1 
+              style={{ y: y1 }}
+              initial={{ y: 100, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+              className="title-huge text-transparent bg-clip-text bg-gradient-to-b from-white to-white/70 tracking-tighter"
+            >
+              GIORGIO
+            </motion.h1>
+            <motion.h1 
+              style={{ y: y2 }}
+              initial={{ y: 100, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 1, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+              className="title-huge text-[var(--brand-primary)] tracking-tighter mt-[-2vw] mix-blend-overlay"
+            >
+              GIACARDI
+            </motion.h1>
+          </div>
+
+          {/* Separator Line */}
+          <motion.div 
+            initial={{ width: 0 }}
+            animate={{ width: "100px" }}
+            transition={{ delay: 0.8, duration: 1 }}
+            className="h-2 bg-white mt-12 mb-12"
+          ></motion.div>
+
+          {/* Bottom Content */}
+          <div className="grid md:grid-cols-2 gap-12 w-full max-w-4xl items-start text-left">
+            <motion.p 
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.6 }}
+              className="text-xl md:text-2xl text-gray-300 leading-relaxed font-light"
+            >
+              {lang === 'it' 
+                ? 'Difendiamo i tuoi diritti oltre i confini. Italia & Francia.'
+                : 'Nous défendons vos droits au-delà des frontières. Italie & France.'}
+            </motion.p>
+
+            <motion.div 
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.8 }}
+              className="flex flex-col gap-4"
+            >
+               <motion.a 
+                 href="#contact" 
+                 whileHover={{ scale: 1.05, backgroundColor: "#ffffff", color: "#000000" }}
+                 whileTap={{ scale: 0.95 }}
+                 className="btn-primary text-center"
+               >
+                 {lang === 'it' ? 'Inizia la Consultazione' : 'Commencer la Consultation'}
+               </motion.a>
+               <motion.a 
+                 href="#areas" 
+                 whileHover={{ scale: 1.05, x: 10 }}
+                 className="flex items-center gap-4 text-white hover:text-[var(--brand-primary)] transition-colors cursor-pointer group"
+               >
+                 <span className="uppercase tracking-widest text-sm font-bold border-b border-transparent group-hover:border-[var(--brand-primary)] pb-1">
+                   {lang === 'it' ? 'Scopri le Aree' : 'Découvrir les Domaines'}
+                 </span>
+                 <span className="text-2xl group-hover:translate-x-2 transition-transform">→</span>
+               </motion.a>
+            </motion.div>
+          </div>
+
+        </div>
+      </div>
+      
+      {/* Scroll Marquee at Bottom */}
+      <div className="absolute bottom-0 w-full overflow-hidden border-t border-white/10 py-4 backdrop-blur-sm">
+        <div className="whitespace-nowrap animate-marquee flex gap-10">
+          {[1,2,3,4,5,6].map((i) => (
+             <span key={i} className="text-6xl font-display font-black text-white/5 uppercase">
+               Privacy • Digital Law • Family • Cross-Border •
+             </span>
+          ))}
+        </div>
+      </div>
+
     </section>
   );
 };
