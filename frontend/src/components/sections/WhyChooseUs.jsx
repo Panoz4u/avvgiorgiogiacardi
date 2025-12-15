@@ -8,7 +8,7 @@ const WhyChooseUs = ({ lang }) => {
     offset: ["start end", "end start"]
   });
 
-  const y1 = useTransform(scrollYProgress, [0.15, 0.5], ["100%", "0%"]);
+  const y1 = useTransform(scrollYProgress, [0.5, 0.85], ["100%", "0%"]);
 
   return (
     <section ref={containerRef} className="relative h-[130vh] bg-[var(--bg-primary)]">
