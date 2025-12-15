@@ -1,96 +1,128 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef, useEffect } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 const WhyChooseUs = ({ lang }) => {
-  const points = [
-    { title: "International", desc: "Expertise IT/FR" },
-    { title: "Digital First", desc: "Remote & Tech Savvy" },
-    { title: "Human Centric", desc: "Empathy & Strategy" }
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  });
+
+  // PHASES
+  // 0.0 -> 0.25: Title Static -> Fade Out
+  // 0.25 -> 0.50: Squares Animation (Navy -> Electric Blue)
+  // 0.50 -> 1.00: Cards Sequence (01, 02, 03)
+
+  const titleOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
+  const titleScale = useTransform(scrollYProgress, [0, 0.2], [1, 0.8]);
+  
+  const squaresOpacity = useTransform(scrollYProgress, [0.2, 0.3, 0.5], [0, 1, 0]);
+  const squaresScale = useTransform(scrollYProgress, [0.2, 0.5], [0.5, 1.5]);
+  const bgTransition = useTransform(scrollYProgress, [0.25, 0.45], ["#050A14", "#0056D2"]);
+
+  // Card Transforms
+  const card1Y = useTransform(scrollYProgress, [0.5, 0.6], ["100vh", "0vh"]);
+  const card2Y = useTransform(scrollYProgress, [0.65, 0.75], ["100vh", "0vh"]);
+  const card3Y = useTransform(scrollYProgress, [0.8, 0.9], ["100vh", "0vh"]);
+
+  const content = [
+    {
+      id: "01",
+      title_it: "International",
+      title_fr: "International",
+      desc_it: "Expertise IT/FR",
+      desc_fr: "Expertise IT/FR"
+    },
+    {
+      id: "02",
+      title_it: "Professionalità",
+      title_fr: "Professionnalisme",
+      desc_it: "Disponibilità & Competenza",
+      desc_fr: "Disponibilité & Compétence"
+    },
+    {
+      id: "03",
+      title_it: "Human Centric",
+      title_fr: "Centré sur l'Humain",
+      desc_it: "Empathy & Strategy",
+      desc_fr: "Empathie & Stratégie"
+    }
   ];
 
-  const containerVars = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.3
-      }
-    }
-  };
-
-  const itemVars = {
-    hidden: { x: -50, opacity: 0 },
-    show: { x: 0, opacity: 1, transition: { type: "spring", stiffness: 100 } }
-  };
-
   return (
-    <section id="why-us" className="py-32 bg-[var(--bg-primary)] border-y border-white/5 overflow-hidden">
-      <div className="container mx-auto px-6">
+    <section ref={containerRef} className="relative h-[400vh] bg-[var(--bg-primary)]">
+      
+      {/* Sticky Container */}
+      <div className="sticky top-0 h-screen overflow-hidden flex flex-col items-center justify-center">
         
-        {/* Massive Text Layout */}
-        <div className="relative">
-          <motion.div 
-            initial={{ x: -100, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            transition={{ duration: 1 }}
-            className="text-[12vw] leading-[0.8] font-display font-black text-white/5 select-none absolute top-0 left-0 -z-10"
-          >
-            WHY US
-          </motion.div>
-          
-          <div className="grid lg:grid-cols-2 gap-16 pt-20">
-            <div>
-              <h2 className="text-4xl md:text-6xl font-display font-bold text-white mb-12">
-                {lang === 'it' ? 'LA TUA DIFESA,' : 'VOTRE DÉFENSE,'} <br/>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--brand-primary)] to-white">
-                  SENZA CONFINI.
-                </span>
-              </h2>
-              <p className="text-xl text-gray-400 font-light leading-relaxed mb-8">
-                {lang === 'it' 
-                  ? 'Un approccio moderno che unisce la tradizione forense alla rapidità del digitale. Parliamo la tua lingua, ovunque tu sia.' 
-                  : 'Une approche moderne alliant tradition juridique et rapidité numérique. Nous parlons votre langue, où que vous soyez.'}
-              </p>
-              
-              <motion.div 
-                variants={containerVars}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true }}
-                className="space-y-8"
-              >
-                {points.map((item, i) => (
-                  <motion.div 
-                    key={i}
-                    variants={itemVars}
-                    whileHover={{ x: 20 }}
-                    className="flex items-center gap-6 group cursor-default"
-                  >
-                    <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-[var(--brand-primary)] group-hover:bg-[var(--brand-primary)] group-hover:text-white transition-all">
-                      {i + 1}
-                    </div>
-                    <div>
-                      <h4 className="text-2xl font-bold text-white">{item.title}</h4>
-                      <p className="text-gray-500">{item.desc}</p>
-                    </div>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </div>
+        {/* Dynamic Background */}
+        <motion.div 
+          className="absolute inset-0 z-0"
+          style={{ backgroundColor: bgTransition }}
+        />
 
-            {/* Visual Abstract Animation - Smooth Loop */}
-            <div className="relative hidden lg:flex items-center justify-center">
-              <div className="relative w-full h-[500px]">
-                {/* Animated Gradient Mesh / Flow */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-[var(--brand-primary)]/20 via-blue-900/10 to-transparent rounded-full filter blur-[80px] animate-float"></div>
-                <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-[var(--brand-primary)] rounded-full mix-blend-screen filter blur-[60px] animate-float" style={{ animationDelay: '1s' }}></div>
-                <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-blue-600 rounded-full mix-blend-screen filter blur-[80px] animate-float" style={{ animationDelay: '2.5s' }}></div>
-                
-                {/* Subtle Grid Lines */}
-                <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
-              </div>
-            </div>
+        {/* Phase 1: Main Title */}
+        <motion.div 
+          style={{ opacity: titleOpacity, scale: titleScale }}
+          className="absolute z-10 text-center px-4"
+        >
+          <h2 className="text-5xl md:text-8xl font-display font-black text-white leading-tight uppercase">
+            {lang === 'it' ? 'LA TUA DIFESA,' : 'VOTRE DÉFENSE,'} <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--brand-primary)] to-white">
+              {lang === 'it' ? 'SENZA CONFINI.' : 'SANS FRONTIÈRES.'}
+            </span>
+          </h2>
+        </motion.div>
+
+        {/* Phase 2: Animated Squares (Transition) */}
+        <motion.div 
+          style={{ opacity: squaresOpacity, scale: squaresScale }}
+          className="absolute z-20 inset-0 flex items-center justify-center pointer-events-none"
+        >
+          <div className="grid grid-cols-3 gap-4 w-full h-full p-20 opacity-50">
+             {[...Array(9)].map((_, i) => (
+               <motion.div 
+                 key={i}
+                 initial={{ opacity: 0, scale: 0 }}
+                 whileInView={{ opacity: 1, scale: 1 }}
+                 transition={{ delay: i * 0.1, duration: 0.5 }}
+                 className="bg-white/10 backdrop-blur-md border border-white/20 rounded-lg"
+               />
+             ))}
           </div>
+        </motion.div>
+
+        {/* Phase 3: Cards Stack */}
+        <div className="absolute z-30 inset-0 flex items-center justify-center pointer-events-none">
+           {/* Card 01 */}
+           <motion.div 
+             style={{ y: card1Y }}
+             className="absolute w-[90vw] md:w-[600px] h-[70vh] bg-[var(--bg-secondary)] border border-white/10 p-12 flex flex-col justify-center items-center text-center shadow-2xl shadow-black/50"
+           >
+             <span className="text-[150px] font-display font-bold text-[var(--brand-primary)] opacity-20 absolute top-[-20px] left-[-20px]">01</span>
+             <h3 className="text-5xl md:text-6xl font-display font-bold text-white mb-4 uppercase">{lang === 'it' ? content[0].title_it : content[0].title_fr}</h3>
+             <p className="text-2xl text-gray-400 font-light">{lang === 'it' ? content[0].desc_it : content[0].desc_fr}</p>
+           </motion.div>
+
+           {/* Card 02 */}
+           <motion.div 
+             style={{ y: card2Y }}
+             className="absolute w-[90vw] md:w-[600px] h-[70vh] bg-[#0a0f1d] border border-white/10 p-12 flex flex-col justify-center items-center text-center shadow-2xl shadow-black/50"
+           >
+             <span className="text-[150px] font-display font-bold text-[var(--brand-primary)] opacity-20 absolute top-[-20px] left-[-20px]">02</span>
+             <h3 className="text-5xl md:text-6xl font-display font-bold text-white mb-4 uppercase">{lang === 'it' ? content[1].title_it : content[1].title_fr}</h3>
+             <p className="text-2xl text-gray-400 font-light">{lang === 'it' ? content[1].desc_it : content[1].desc_fr}</p>
+           </motion.div>
+
+           {/* Card 03 */}
+           <motion.div 
+             style={{ y: card3Y }}
+             className="absolute w-[90vw] md:w-[600px] h-[70vh] bg-[var(--brand-primary)] border border-white/10 p-12 flex flex-col justify-center items-center text-center shadow-2xl shadow-black/50"
+           >
+             <span className="text-[150px] font-display font-bold text-white opacity-20 absolute top-[-20px] left-[-20px]">03</span>
+             <h3 className="text-5xl md:text-6xl font-display font-bold text-white mb-4 uppercase">{lang === 'it' ? content[2].title_it : content[2].title_fr}</h3>
+             <p className="text-2xl text-white/80 font-light">{lang === 'it' ? content[2].desc_it : content[2].desc_fr}</p>
+           </motion.div>
         </div>
 
       </div>

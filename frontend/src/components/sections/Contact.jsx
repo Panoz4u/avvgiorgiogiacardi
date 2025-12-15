@@ -28,7 +28,7 @@ const Contact = ({ lang }) => {
       <div className="container mx-auto px-6 max-w-5xl">
         
         <div className="text-center mb-24">
-          <h2 className="text-6xl md:text-8xl font-display font-black text-white mb-6 uppercase">
+          <h2 className="text-4xl md:text-8xl font-display font-black text-white mb-6 uppercase break-words">
             {lang === 'it' ? 'Parliamone' : 'Parlons-en'}
           </h2>
           <p className="text-xl text-gray-400">

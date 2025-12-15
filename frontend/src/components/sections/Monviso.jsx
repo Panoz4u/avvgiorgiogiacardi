@@ -1,12 +1,21 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 const Monviso = () => {
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.playbackRate = 0.3; // 0.3x speed
+    }
+  }, []);
+
   return (
     <section className="relative h-[80vh] flex items-center justify-center overflow-hidden">
       {/* Background Video Loop */}
       <div className="absolute inset-0 w-full h-full overflow-hidden">
         <video 
+          ref={videoRef}
           autoPlay 
           loop 
           muted 
@@ -35,9 +44,6 @@ const Monviso = () => {
           </h2>
           <p className="mt-4 text-white text-xl md:text-2xl font-serif italic">
              "Sia fatta giustizia, anche se cadesse il cielo"
-          </p>
-          <p className="mt-6 text-gray-300 text-lg font-light tracking-wide">
-             La solidità delle montagne, la precisione del diritto.
           </p>
         </motion.div>
       </div>
