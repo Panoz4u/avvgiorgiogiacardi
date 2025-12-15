@@ -1,25 +1,24 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
-const Footer = ({ lang }) => {
-  const currentYear = new Date().getFullYear();
-  
+const Footer = () => {
   return (
-    <footer className="bg-black border-t border-[var(--border-subtle)] py-12">
-      <div className="container mx-auto px-6">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+    <footer className="bg-black py-20 border-t border-white/10 overflow-hidden relative">
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="flex flex-col md:flex-row justify-between items-end gap-10">
+          <div>
+             <h2 className="text-[15vw] leading-[0.8] font-display font-black text-white/10 select-none pointer-events-none absolute bottom-[-5vw] left-[-2vw]">
+               GIACARDI
+             </h2>
+             <div className="text-xl text-gray-400 font-light relative z-10 mb-8">
+               © {new Date().getFullYear()} Studio Legale Giacardi.
+             </div>
+          </div>
           
-          <div className="text-center md:text-left">
-            <h4 className="text-lg font-serif font-bold text-white mb-2">GIORGIO GIACARDI</h4>
-            <p className="text-sm text-gray-500">Avvocato / Avocat</p>
-          </div>
-
-          <div className="flex gap-6 text-sm text-gray-500">
-            <a href="#" className="hover:text-white transition-colors">{lang === 'it' ? 'Privacy Policy' : 'Politique de Confidentialité'}</a>
-            <a href="#" className="hover:text-white transition-colors">{lang === 'it' ? 'Note Legali' : 'Mentions Légales'}</a>
-          </div>
-
-          <div className="text-sm text-gray-600">
-            © {currentYear} Giorgio Giacardi. All rights reserved.
+          <div className="flex flex-col gap-4 text-right z-10">
+            <a href="#" className="text-2xl text-white hover:text-[var(--brand-primary)] font-bold transition-colors">LinkedIn</a>
+            <a href="#" className="text-2xl text-white hover:text-[var(--brand-primary)] font-bold transition-colors">Instagram</a>
+            <a href="mailto:avv..." className="text-2xl text-white hover:text-[var(--brand-primary)] font-bold transition-colors">Email</a>
           </div>
         </div>
       </div>

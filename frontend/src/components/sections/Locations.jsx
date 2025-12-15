@@ -1,64 +1,64 @@
 import React from 'react';
 import { MapPin } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const Locations = ({ lang }) => {
   return (
-    <section id="locations" className="py-24 border-t border-[var(--border-subtle)] bg-[var(--bg-secondary)]">
+    <section id="locations" className="py-32 bg-[var(--bg-secondary)] relative">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
-           <h2 className="text-[var(--brand-primary)] font-mono text-sm tracking-widest mb-4">
-            LOCATIONS
-          </h2>
-          <h3 className="text-3xl font-serif font-bold">
-            {lang === 'it' ? 'Dove Siamo' : 'Où Nous Trouver'}
-          </h3>
-        </div>
+        <h2 className="text-center text-3xl font-mono text-[var(--brand-primary)] mb-20 tracking-widest">
+          LOCATIONS / SEDI
+        </h2>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-4">
           
-          {/* Italy */}
-          <div className="group relative overflow-hidden bg-black border border-[var(--border-subtle)] p-10 hover:border-[var(--brand-primary)] transition-all duration-500">
-            <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-               <span className="text-8xl font-bold font-serif">IT</span>
+          {/* Card Italy */}
+          <motion.div 
+            whileHover={{ scale: 0.98, backgroundColor: "rgba(255,255,255,0.02)" }}
+            className="border border-white/10 p-12 min-h-[400px] flex flex-col justify-between bg-[var(--bg-primary)] group"
+          >
+            <div>
+              <span className="text-6xl font-display font-bold text-white/10 group-hover:text-white/30 transition-colors">IT</span>
+              <h3 className="text-4xl font-bold text-white mt-4">ITALIA</h3>
+              <p className="text-[var(--brand-primary)] text-xl mt-2">Main Office</p>
             </div>
             
-            <div className="relative z-10">
-              <div className="flex items-center gap-3 mb-6">
-                <MapPin className="text-[var(--brand-primary)]" />
-                <h4 className="text-2xl font-bold font-serif">ITALIA</h4>
-              </div>
-              <div className="space-y-2 text-gray-400">
-                <p className="text-white font-medium">Studio Legale Giacardi</p>
-                <p>Via Stazione n. 32</p>
-                <p>12049 Trinità (CN)</p>
-                <p className="mt-4 pt-4 border-t border-gray-800 text-sm font-mono">
-                  PIEMONTE / CUNEO
-                </p>
-              </div>
+            <div className="mt-10 border-t border-white/10 pt-8">
+              <p className="text-2xl text-gray-300 font-light">Trinità (Cuneo)</p>
+              <p className="text-gray-500 mt-2">Via Stazione 32</p>
+              <motion.a 
+                href="#" 
+                className="inline-block mt-6 text-white border-b border-white pb-1 hover:text-[var(--brand-primary)] hover:border-[var(--brand-primary)] transition-colors"
+                whileHover={{ x: 10 }}
+              >
+                Vedi Mappa →
+              </motion.a>
             </div>
-          </div>
+          </motion.div>
 
-          {/* France */}
-          <div className="group relative overflow-hidden bg-black border border-[var(--border-subtle)] p-10 hover:border-[var(--brand-primary)] transition-all duration-500">
-             <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-               <span className="text-8xl font-bold font-serif">FR</span>
+          {/* Card France */}
+          <motion.div 
+             whileHover={{ scale: 0.98, backgroundColor: "rgba(255,255,255,0.02)" }}
+             className="border border-white/10 p-12 min-h-[400px] flex flex-col justify-between bg-[var(--bg-primary)] group"
+          >
+            <div>
+              <span className="text-6xl font-display font-bold text-white/10 group-hover:text-white/30 transition-colors">FR</span>
+              <h3 className="text-4xl font-bold text-white mt-4">FRANCE</h3>
+              <p className="text-[var(--brand-primary)] text-xl mt-2">Paris Office</p>
             </div>
-
-            <div className="relative z-10">
-              <div className="flex items-center gap-3 mb-6">
-                <MapPin className="text-[var(--brand-primary)]" />
-                <h4 className="text-2xl font-bold font-serif">FRANCE</h4>
-              </div>
-              <div className="space-y-2 text-gray-400">
-                <p className="text-white font-medium">Cabinet Secondaire</p>
-                <p>20 Rue Manin, 75019 Paris</p>
-                <p className="text-sm italic text-gray-500 mt-2">Collaboration: 3 Avenue Saint Honoré d'Eylau, 75116 Paris</p>
-                <p className="mt-4 pt-4 border-t border-gray-800 text-sm font-mono">
-                  PARIS / ÎLE-DE-FRANCE
-                </p>
-              </div>
+            
+            <div className="mt-10 border-t border-white/10 pt-8">
+              <p className="text-2xl text-gray-300 font-light">Paris (75019)</p>
+              <p className="text-gray-500 mt-2">20 Rue Manin</p>
+              <motion.a 
+                href="#" 
+                className="inline-block mt-6 text-white border-b border-white pb-1 hover:text-[var(--brand-primary)] hover:border-[var(--brand-primary)] transition-colors"
+                whileHover={{ x: 10 }}
+              >
+                Voir Carte →
+              </motion.a>
             </div>
-          </div>
+          </motion.div>
 
         </div>
       </div>

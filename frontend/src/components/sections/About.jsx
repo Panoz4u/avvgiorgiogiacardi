@@ -1,96 +1,79 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle2 } from 'lucide-react';
 
 const About = ({ lang }) => {
-  const content = {
+  const t = {
     it: {
       title: "CHI SONO",
-      subtitle: "Un ponte giuridico tra Italia e Francia",
-      p1: "Avvocato iscritto al Foro di Cuneo, opero da oltre vent'anni nel panorama legale piemontese e internazionale.",
-      p2: "La mia attività si distingue per una forte vocazione transfrontaliera, collaborando stabilmente con studi legali parigini e assistendo clienti con interessi in entrambi i paesi.",
-      p3: "Oltre alla professione forense, ho ricoperto ruoli istituzionali e amministrativi che mi hanno conferito una visione pragmatica e completa del diritto.",
-      list: [
-        "Iscritto al Foro di Cuneo dal 2004",
-        "Collaborazioni attive a Parigi",
-        "Giornalista Pubblicista",
-        "Esperto CCIAA Cuneo"
+      subtitle: "Avvocato Europeo.",
+      desc: "Opero tra Italia e Francia. Non solo un legale, ma un partner strategico per le tue sfide transfrontaliere.",
+      stats: [
+        { val: "20+", label: "Anni di Esperienza" },
+        { val: "2", label: "Sedi (IT/FR)" },
+        { val: "100%", label: "Dedizione" }
       ]
     },
     fr: {
       title: "QUI SUIS-JE",
-      subtitle: "Un pont juridique entre l'Italie et la France",
-      p1: "Avocat inscrit au Barreau de Cuneo, j'exerce depuis plus de vingt ans dans le paysage juridique piémontais et international.",
-      p2: "Mon activité se distingue par une forte vocation transfrontalière, collaborant régulièrement avec des cabinets parisiens et assistant des clients ayant des intérêts dans les deux pays.",
-      p3: "Au-delà de la profession d'avocat, j'ai occupé des fonctions institutionnelles et administratives qui m'ont apporté une vision pragmatique et globale du droit.",
-      list: [
-        "Inscrit au Barreau de Cuneo depuis 2004",
-        "Collaborations actives à Paris",
-        "Journaliste Publiciste",
-        "Expert CCIAA Cuneo"
+      subtitle: "Avocat Européen.",
+      desc: "J'opère entre l'Italie et la France. Pas seulement un avocat, mais un partenaire stratégique pour vos défis transfrontaliers.",
+      stats: [
+        { val: "20+", label: "Années d'Expérience" },
+        { val: "2", label: "Bureaux (IT/FR)" },
+        { val: "100%", label: "Dévouement" }
       ]
     }
-  };
-
-  const t = content[lang];
+  }[lang];
 
   return (
-    <section id="about" className="py-24 bg-[var(--bg-secondary)] relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-[#0056D2]/5 to-transparent"></div>
-      
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="grid md:grid-cols-2 gap-16 items-center">
+    <section id="about" className="py-32 bg-[var(--bg-primary)] relative border-t border-white/5">
+      <div className="container mx-auto px-6">
+        <div className="grid lg:grid-cols-2 gap-20 items-end">
           
           <motion.div 
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.8 }}
           >
-            <h2 className="text-[var(--brand-primary)] font-mono text-sm tracking-widest mb-2 flex items-center gap-3">
-              <span className="w-8 h-[1px] bg-[var(--brand-primary)]"></span>
+            <span className="text-[var(--brand-primary)] font-bold tracking-[0.3em] uppercase mb-4 block">
               {t.title}
+            </span>
+            <h2 className="text-5xl md:text-7xl font-display font-black leading-[0.9] mb-8 text-white">
+              {t.subtitle}
             </h2>
-            <h3 className="text-3xl md:text-4xl font-serif font-bold mb-8">{t.subtitle}</h3>
-            
-            <div className="space-y-6 text-gray-300 leading-relaxed text-lg">
-              <p>{t.p1}</p>
-              <p>{t.p2}</p>
-              <p>{t.p3}</p>
-            </div>
+            <p className="text-xl md:text-2xl text-gray-400 font-light leading-relaxed max-w-lg">
+              {t.desc}
+            </p>
 
-            <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {t.list.map((item, i) => (
-                <div key={i} className="flex items-center gap-3">
-                  <CheckCircle2 className="text-[var(--brand-primary)]" size={20} />
-                  <span className="text-sm font-medium">{item}</span>
+            <div className="flex gap-12 mt-16">
+              {t.stats.map((stat, i) => (
+                <div key={i}>
+                  <div className="text-4xl font-display font-bold text-white mb-1">{stat.val}</div>
+                  <div className="text-xs text-gray-500 uppercase tracking-widest">{stat.label}</div>
                 </div>
               ))}
             </div>
           </motion.div>
 
+          {/* Image / Visual Block */}
           <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{ scale: 0.9, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="relative"
+            className="relative h-[600px] w-full bg-[#0a0f1d] border border-white/5 overflow-hidden group"
           >
-            <div className="aspect-[3/4] bg-[#0a0a0a] border border-[var(--border-subtle)] p-2 relative">
-               {/* Minimalist profile representation or placeholder if no image provided */}
-               <div className="w-full h-full bg-[var(--bg-primary)] flex items-center justify-center overflow-hidden grayscale contrast-125">
-                 <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
-                 {/* Using a placeholder or potentially the Monviso image if profile is missing, but here we keep it abstract/dark */}
-                 <div className="text-center p-10">
-                    <span className="text-6xl font-serif text-[var(--border-medium)]">GG</span>
-                 </div>
-               </div>
-               
-               {/* Decorative frame */}
-               <div className="absolute -bottom-4 -right-4 w-24 h-24 border-r-2 border-b-2 border-[var(--brand-primary)]"></div>
-               <div className="absolute -top-4 -left-4 w-24 h-24 border-l-2 border-t-2 border-[var(--brand-primary)]"></div>
-            </div>
+             {/* Placeholder for Profile - Creative Style */}
+             <div className="absolute inset-0 bg-gradient-to-tr from-[var(--brand-primary)]/20 to-transparent opacity-50 group-hover:opacity-80 transition-opacity duration-500"></div>
+             <div className="absolute inset-0 flex items-center justify-center">
+                <span className="text-[200px] font-display font-black text-white/5 group-hover:text-white/10 transition-colors duration-500 select-none">
+                  GG
+                </span>
+             </div>
+             
+             {/* Decorative Lines */}
+             <div className="absolute bottom-0 left-0 w-full h-1 bg-[var(--brand-primary)] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-700"></div>
           </motion.div>
 
         </div>

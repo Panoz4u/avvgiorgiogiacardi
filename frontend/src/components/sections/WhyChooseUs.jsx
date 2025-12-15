@@ -2,94 +2,69 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const WhyChooseUs = ({ lang }) => {
-  const content = {
-    it: {
-      title: "PERCHÉ SCEGLIERE NOI",
-      points: [
-        {
-          head: "Esperienza Reale",
-          body: "Vent'anni di pratica su casi complessi e in continua evoluzione."
-        },
-        {
-          head: "Dimensione Internazionale",
-          body: "Doppia operatività Italia-Francia con sede stabile a Parigi."
-        },
-        {
-          head: "Approccio Umano",
-          body: "Ascolto attivo e soluzioni concrete, oltre il semplice parere legale."
-        },
-        {
-          head: "Visione Futura",
-          body: "Padronanza delle nuove sfide: digitale, privacy e reputazione online."
-        }
-      ]
-    },
-    fr: {
-      title: "POURQUOI NOUS CHOISIR",
-      points: [
-        {
-          head: "Expérience Réelle",
-          body: "Vingt ans de pratique sur des dossiers complexes et en évolution."
-        },
-        {
-          head: "Dimension Internationale",
-          body: "Double activité Italie-France avec une base stable à Paris."
-        },
-        {
-          head: "Approche Humaine",
-          body: "Écoute active et solutions concrètes, au-delà du simple avis juridique."
-        },
-        {
-          head: "Vision Future",
-          body: "Maîtrise des nouveaux défis : numérique, confidentialité et réputation en ligne."
-        }
-      ]
-    }
-  };
-
-  const t = content[lang];
-
   return (
-    <section id="why-us" className="py-24 bg-black relative">
+    <section id="why-us" className="py-32 bg-[var(--bg-primary)] border-y border-white/5 overflow-hidden">
       <div className="container mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-16">
+        
+        {/* Massive Text Layout */}
+        <div className="relative">
+          <motion.div 
+            initial={{ x: -100, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            transition={{ duration: 1 }}
+            className="text-[12vw] leading-[0.8] font-display font-black text-white/5 select-none absolute top-0 left-0 -z-10"
+          >
+            WHY US
+          </motion.div>
           
-          <div className="flex flex-col justify-center">
-             <h2 className="text-[var(--brand-primary)] font-mono text-sm tracking-widest mb-6">
-                {t.title}
-             </h2>
-             <div className="space-y-12">
-               {t.points.map((point, idx) => (
-                 <motion.div 
-                   key={idx}
-                   initial={{ opacity: 0, x: -20 }}
-                   whileInView={{ opacity: 1, x: 0 }}
-                   viewport={{ once: true }}
-                   transition={{ delay: idx * 0.2 }}
-                   className="pl-6 border-l border-[var(--border-subtle)] hover:border-[var(--brand-primary)] transition-colors duration-300"
-                 >
-                   <h4 className="text-2xl font-serif font-bold mb-2 text-white">{point.head}</h4>
-                   <p className="text-gray-400">{point.body}</p>
-                 </motion.div>
-               ))}
-             </div>
-          </div>
+          <div className="grid lg:grid-cols-2 gap-16 pt-20">
+            <div>
+              <h2 className="text-4xl md:text-6xl font-display font-bold text-white mb-12">
+                {lang === 'it' ? 'LA TUA DIFESA,' : 'VOTRE DÉFENSE,'} <br/>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--brand-primary)] to-white">
+                  SENZA CONFINI.
+                </span>
+              </h2>
+              <p className="text-xl text-gray-400 font-light leading-relaxed mb-8">
+                {lang === 'it' 
+                  ? 'Un approccio moderno che unisce la tradizione forense alla rapidità del digitale. Parliamo la tua lingua, ovunque tu sia.' 
+                  : 'Une approche moderne alliant tradition juridique et rapidité numérique. Nous parlons votre langue, où que vous soyez.'}
+              </p>
+              
+              <div className="space-y-8">
+                {[
+                  { title: "International", desc: "Expertise IT/FR" },
+                  { title: "Digital First", desc: "Remote & Tech Savvy" },
+                  { title: "Human Centric", desc: "Empathy & Strategy" }
+                ].map((item, i) => (
+                  <motion.div 
+                    key={i}
+                    whileHover={{ x: 20 }}
+                    className="flex items-center gap-6 group cursor-default"
+                  >
+                    <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-[var(--brand-primary)] group-hover:bg-[var(--brand-primary)] group-hover:text-white transition-all">
+                      {i + 1}
+                    </div>
+                    <div>
+                      <h4 className="text-2xl font-bold text-white">{item.title}</h4>
+                      <p className="text-gray-500">{item.desc}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
 
-          <div className="relative hidden lg:block">
-            {/* Abstract visual representation of 'connection' or 'bridge' */}
-            <div className="absolute inset-0 bg-gradient-to-br from-[var(--brand-primary)]/10 to-transparent rounded-full blur-3xl"></div>
-            <div className="h-full w-full border border-[var(--border-subtle)] flex items-center justify-center relative overflow-hidden p-10">
-               <div className="text-[200px] font-serif font-bold text-[var(--bg-secondary)] absolute select-none z-0 opacity-50">
-                 &
-               </div>
-               <div className="relative z-10 text-center">
-                 <h3 className="text-6xl font-serif font-bold mb-2">IT <span className="text-[var(--brand-primary)]">/</span> FR</h3>
-                 <p className="text-sm tracking-[0.3em] uppercase text-gray-400">Cross Border Legal</p>
-               </div>
+            {/* Visual Abstract Element */}
+            <div className="relative hidden lg:flex items-center justify-center">
+              <div className="w-[400px] h-[400px] border border-white/10 rounded-full flex items-center justify-center animate-slow-spin">
+                <div className="w-[300px] h-[300px] border border-[var(--brand-primary)]/30 rounded-full flex items-center justify-center">
+                   <div className="w-[100px] h-[100px] bg-[var(--brand-primary)] blur-[80px]"></div>
+                </div>
+              </div>
             </div>
           </div>
-
         </div>
+
       </div>
     </section>
   );

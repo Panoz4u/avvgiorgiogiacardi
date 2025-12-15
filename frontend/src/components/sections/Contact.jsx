@@ -1,121 +1,87 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
-import { Send, Loader2 } from 'lucide-react';
+import { motion } from 'framer-motion';
 import axios from 'axios';
 
 const Contact = ({ lang }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
   
-  // Use backend URL from environment or default relative path if proxy is set up
   const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
 
   const onSubmit = async (data) => {
     setIsSubmitting(true);
     try {
-      const payload = { ...data, lang };
-      await axios.post(`${BACKEND_URL}/api/contact`, payload);
-      
-      toast.success(lang === 'it' ? 'Messaggio inviato con successo!' : 'Message envoyé avec succès!');
+      await axios.post(`${BACKEND_URL}/api/contact`, { ...data, lang });
+      toast.success("Messaggio Inviato / Message Envoyé");
       reset();
     } catch (error) {
-      console.error(error);
-      toast.error(lang === 'it' ? 'Errore durante l\'invio. Riprova.' : 'Erreur lors de l\'envoi. Réessayez.');
+      toast.error("Error / Errore");
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const t = {
-    title: lang === 'it' ? 'CONTATTACI' : 'CONTACTEZ-NOUS',
-    subtitle: lang === 'it' ? 'Richiedi una consulenza' : 'Demander une consultation',
-    name: lang === 'it' ? 'Nome e Cognome' : 'Nom et Prénom',
-    email: 'Email',
-    phone: lang === 'it' ? 'Telefono (Opzionale)' : 'Téléphone (Optionnel)',
-    message: lang === 'it' ? 'Messaggio' : 'Message',
-    send: lang === 'it' ? 'Invia Messaggio' : 'Envoyer Message',
-    req: lang === 'it' ? 'Campo obbligatorio' : 'Champ obligatoire'
-  };
-
   return (
-    <section id="contact" className="py-24 relative bg-black">
-      <div className="container mx-auto px-6 max-w-4xl">
-        <div className="text-center mb-16">
-          <h2 className="text-[var(--brand-primary)] font-mono text-sm tracking-widest mb-4">
-            {t.title}
+    <section id="contact" className="py-32 bg-[var(--bg-primary)] border-t border-white/10">
+      <div className="container mx-auto px-6 max-w-5xl">
+        
+        <div className="text-center mb-24">
+          <h2 className="text-6xl md:text-8xl font-display font-black text-white mb-6 uppercase">
+            {lang === 'it' ? 'Parliamone' : 'Parlons-en'}
           </h2>
-          <h3 className="text-4xl font-serif font-bold text-white">
-            {t.subtitle}
-          </h3>
+          <p className="text-xl text-gray-400">
+            {lang === 'it' ? 'Il tuo caso merita attenzione.' : 'Votre cas mérite attention.'}
+          </p>
         </div>
 
-        <div className="bg-[var(--bg-secondary)] border border-[var(--border-subtle)] p-8 md:p-12">
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-400 uppercase tracking-wide">{t.name}</label>
-                <input 
-                  {...register("name", { required: true })}
-                  className="w-full bg-black border-b border-[var(--border-subtle)] focus:border-[var(--brand-primary)] text-white p-3 outline-none transition-colors rounded-none"
-                  placeholder="John Doe"
-                />
-                {errors.name && <span className="text-red-500 text-xs">{t.req}</span>}
-              </div>
-              
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-400 uppercase tracking-wide">{t.email}</label>
-                <input 
-                  {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
-                  className="w-full bg-black border-b border-[var(--border-subtle)] focus:border-[var(--brand-primary)] text-white p-3 outline-none transition-colors rounded-none"
-                  placeholder="john@example.com"
-                />
-                {errors.email && <span className="text-red-500 text-xs">{t.req}</span>}
-              </div>
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-16">
+          <div className="grid md:grid-cols-2 gap-16">
+            <div className="group">
+              <label className="block text-sm font-bold text-[var(--brand-primary)] uppercase tracking-widest mb-4">Name</label>
+              <motion.input 
+                {...register("name", { required: true })}
+                whileFocus={{ scale: 1.02 }}
+                className="w-full bg-transparent border-b-2 border-white/20 text-3xl md:text-4xl text-white py-4 outline-none focus:border-[var(--brand-primary)] transition-colors placeholder-white/10 font-display"
+                placeholder="Giorgio..."
+              />
+              {errors.name && <span className="text-red-500 text-sm mt-2">Required</span>}
             </div>
-
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-400 uppercase tracking-wide">{t.phone}</label>
-              <input 
-                {...register("phone")}
-                className="w-full bg-black border-b border-[var(--border-subtle)] focus:border-[var(--brand-primary)] text-white p-3 outline-none transition-colors rounded-none"
-                placeholder="+39 ..."
+            
+            <div className="group">
+              <label className="block text-sm font-bold text-[var(--brand-primary)] uppercase tracking-widest mb-4">Email</label>
+              <motion.input 
+                {...register("email", { required: true })}
+                whileFocus={{ scale: 1.02 }}
+                className="w-full bg-transparent border-b-2 border-white/20 text-3xl md:text-4xl text-white py-4 outline-none focus:border-[var(--brand-primary)] transition-colors placeholder-white/10 font-display"
+                placeholder="@..."
               />
             </div>
+          </div>
 
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-400 uppercase tracking-wide">{t.message}</label>
-              <textarea 
-                {...register("message", { required: true })}
-                rows={5}
-                className="w-full bg-black border-b border-[var(--border-subtle)] focus:border-[var(--brand-primary)] text-white p-3 outline-none transition-colors rounded-none resize-none"
-                placeholder="..."
-              />
-              {errors.message && <span className="text-red-500 text-xs">{t.req}</span>}
-            </div>
+          <div className="group">
+            <label className="block text-sm font-bold text-[var(--brand-primary)] uppercase tracking-widest mb-4">Message</label>
+            <motion.textarea 
+              {...register("message", { required: true })}
+              whileFocus={{ scale: 1.02 }}
+              rows={3}
+              className="w-full bg-transparent border-b-2 border-white/20 text-2xl md:text-3xl text-white py-4 outline-none focus:border-[var(--brand-primary)] transition-colors placeholder-white/10 resize-none font-display"
+              placeholder="..."
+            />
+          </div>
 
-            <button 
-              type="submit" 
-              disabled={isSubmitting}
-              className="btn-primary w-full justify-center group"
-            >
-              {isSubmitting ? (
-                <Loader2 className="animate-spin" />
-              ) : (
-                <>
-                  {t.send}
-                  <Send size={18} className="group-hover:translate-x-1 transition-transform" />
-                </>
-              )}
-            </button>
-          </form>
-        </div>
+          <motion.button 
+            type="submit"
+            disabled={isSubmitting}
+            whileHover={{ scale: 1.02, backgroundColor: "#ffffff", color: "#000000" }}
+            whileTap={{ scale: 0.98 }}
+            className="w-full bg-[var(--brand-primary)] text-white py-8 text-2xl font-bold uppercase tracking-widest hover:shadow-[0_0_50px_rgba(0,86,210,0.5)] transition-all"
+          >
+            {isSubmitting ? 'Sending...' : (lang === 'it' ? 'INVIA ORA' : 'ENVOYER')}
+          </motion.button>
+        </form>
 
-        <div className="mt-12 text-center text-gray-500 text-sm">
-           <a href="mailto:avvgiorgiogiacardi@gmail.com" className="hover:text-[var(--brand-primary)] transition-colors">
-             avvgiorgiogiacardi@gmail.com
-           </a>
-        </div>
       </div>
     </section>
   );
