@@ -8,10 +8,10 @@ const WhyChooseUs = ({ lang }) => {
     offset: ["start end", "end start"]
   });
 
-  const y1 = useTransform(scrollYProgress, [0.5, 0.85], ["100%", "0%"]);
+  const y1 = useTransform(scrollYProgress, [0.6, 0.95], ["100%", "0%"]);
 
   return (
-    <section ref={containerRef} className="relative h-[130vh] bg-[var(--bg-primary)]">
+    <section ref={containerRef} className="relative h-[180vh] bg-[var(--bg-primary)]">
 
       {/* Sticky Frame */}
       <div className="sticky top-0 h-screen w-full overflow-hidden">
