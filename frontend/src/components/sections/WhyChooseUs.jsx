@@ -8,126 +8,128 @@ const WhyChooseUs = ({ lang }) => {
     offset: ["start start", "end end"]
   });
 
-  // Animation Phases
-  // 0.0 - 0.2: Title Fade Out
-  // 0.2 - 0.4: Pixel Grid Animation (Navy -> Electric Blue)
-  // 0.4 - 1.0: Cards Parallax Stack
+  // SCROLL LOGIC:
+  // We have a container of 400vh (4 screens).
+  // 0.00 - 0.25: Slide 1 (Intro) stays, then Slide 2 covers it.
+  // 0.25 - 0.50: Slide 2 (Intl) stays, then Slide 3 covers it.
+  // 0.50 - 0.75: Slide 3 (Prof) stays, then Slide 4 covers it.
+  // 0.75 - 1.00: Slide 4 (Human) stays.
 
-  const titleOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
-  const gridOpacity = useTransform(scrollYProgress, [0.15, 0.3], [0, 1]);
-  const gridScale = useTransform(scrollYProgress, [0.15, 0.4], [0.5, 1.2]); // Zoom effect
-  
-  // Dynamic Background Color for the whole section
-  const bgColor = useTransform(
-    scrollYProgress, 
-    [0.2, 0.4], 
-    ["#050A14", "#0056D2"] // Navy -> Electric Blue
-  );
+  const y2 = useTransform(scrollYProgress, [0.15, 0.35], ["100%", "0%"]);
+  const y3 = useTransform(scrollYProgress, [0.40, 0.60], ["100%", "0%"]);
+  const y4 = useTransform(scrollYProgress, [0.65, 0.85], ["100%", "0%"]);
 
-  const content = [
+  // Slight parallax scale for previous slides to give depth
+  const scale1 = useTransform(scrollYProgress, [0.15, 0.35], [1, 0.9]);
+  const scale2 = useTransform(scrollYProgress, [0.40, 0.60], [1, 0.9]);
+  const scale3 = useTransform(scrollYProgress, [0.65, 0.85], [1, 0.9]);
+
+  const slides = [
     {
       id: "01",
-      title: "International",
-      subtitle: "Expertise IT/FR"
+      title_it: "Internazionalità",
+      title_fr: "International",
+      desc_it: "Esperienza IT/FR",
+      desc_fr: "Expertise IT/FR"
     },
     {
       id: "02",
-      title: lang === 'it' ? "Professionalità" : "Professionnalisme",
-      subtitle: lang === 'it' ? "Disponibilità & Competenza" : "Disponibilité & Compétence"
+      title_it: "Professionalità",
+      title_fr: "Professionnalisme",
+      desc_it: "Al servizio del cliente",
+      desc_fr: "Au service du client"
     },
     {
       id: "03",
-      title: "Human Centric",
-      subtitle: "Empathy & Strategy"
+      title_it: "Rapporti Umani",
+      title_fr: "Relations Humaines",
+      desc_it: "Empatia & Strategia",
+      desc_fr: "Empathie & Stratégie"
     }
   ];
 
   return (
-    <section ref={containerRef} className="relative h-[400vh] bg-[var(--bg-primary)] overflow-hidden">
-      
-      {/* Sticky Viewport */}
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col items-center justify-center">
-        
-        {/* Animated Background Layer */}
-        <motion.div 
-          className="absolute inset-0 z-0 transition-colors duration-0"
-          style={{ backgroundColor: bgColor }}
-        />
+    <section ref={containerRef} className="relative h-[400vh] bg-[var(--bg-primary)]">
+      <div className="sticky top-0 h-screen w-full overflow-hidden">
 
-        {/* Phase 1: Intro Title */}
+        {/* --- SLIDE 1: INTRO (NAVY) --- */}
         <motion.div 
-          style={{ opacity: titleOpacity }}
-          className="absolute z-10 text-center px-4 w-full"
+          style={{ scale: scale1 }}
+          className="absolute inset-0 w-full h-full bg-[#050A14] flex items-center justify-center p-6 z-10"
         >
-          <h2 className="text-[8vw] md:text-[6vw] font-display font-black text-white leading-[0.9] uppercase">
-            {lang === 'it' ? 'LA TUA DIFESA,' : 'VOTRE DÉFENSE,'} <br />
-            <span className="text-white/50">
-              {lang === 'it' ? 'SENZA CONFINI.' : 'SANS FRONTIÈRES.'}
-            </span>
-          </h2>
+          <div className="text-center max-w-5xl">
+            <h2 className="text-[10vw] md:text-[6vw] font-display font-black text-white leading-[0.9] uppercase">
+              {lang === 'it' ? 'LA TUA DIFESA,' : 'VOTRE DÉFENSE,'} <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white/50 to-white/20">
+                {lang === 'it' ? 'SENZA CONFINI.' : 'SANS FRONTIÈRES.'}
+              </span>
+            </h2>
+            <div className="mt-12 w-1 h-24 bg-white/20 mx-auto animate-pulse"></div>
+          </div>
         </motion.div>
 
-        {/* Phase 2: Big Pixel Grid */}
+
+        {/* --- SLIDE 2: 01 INTERNATIONAL (ELECTRIC BLUE) --- */}
         <motion.div 
-          style={{ opacity: gridOpacity, scale: gridScale }}
-          className="absolute inset-0 z-10 grid grid-cols-4 md:grid-cols-6 grid-rows-6 gap-1 pointer-events-none"
+          style={{ y: y2, scale: scale2 }}
+          className="absolute inset-0 w-full h-full bg-[#0056D2] flex flex-col items-center justify-center p-6 z-20"
         >
-           {[...Array(36)].map((_, i) => (
-             <motion.div
-               key={i}
-               className="bg-[#0056D2] border border-white/10"
-               initial={{ opacity: 0 }}
-               whileInView={{ 
-                 opacity: [0, 1, 0.8],
-                 backgroundColor: ["#050A14", "#0056D2", "#004bb5"]
-               }}
-               transition={{ 
-                 duration: 1, 
-                 delay: i * 0.02, 
-                 repeat: Infinity, 
-                 repeatType: "reverse" 
-               }}
-             />
-           ))}
+          <div className="w-full max-w-6xl border-t border-white/30 pt-8">
+            <div className="flex justify-between items-end mb-10">
+               <span className="text-[15vw] leading-[0.8] font-display font-black text-white/20">01</span>
+               <div className="hidden md:block w-32 h-32 rounded-full border border-white/30 animate-slow-spin"></div>
+            </div>
+            
+            <h3 className="text-[10vw] md:text-[7vw] font-display font-black text-white uppercase leading-none mb-6">
+              {lang === 'it' ? slides[0].title_it : slides[0].title_fr}
+            </h3>
+            <p className="text-2xl md:text-4xl text-white font-light tracking-wide border-l-4 border-black pl-6">
+              {lang === 'it' ? slides[0].desc_it : slides[0].desc_fr}
+            </p>
+          </div>
         </motion.div>
 
-        {/* Phase 3: Cards Stack */}
-        <div className="absolute z-20 w-full h-full flex items-center justify-center pointer-events-none">
-          {content.map((card, i) => {
-             // Calculate entrance per card
-             const start = 0.4 + (i * 0.2);
-             const end = start + 0.15;
-             // Use hooks unconditionally, logic inside transform
-             const y = useTransform(scrollYProgress, [start, end], ["150vh", "0vh"]);
-             const scale = useTransform(scrollYProgress, [end, end + 0.2], [1, 0.9]);
-             const opacity = useTransform(scrollYProgress, [end, end + 0.2], [1, 0]);
 
-             return (
-               <motion.div
-                 key={i}
-                 style={{ y, scale, opacity }}
-                 className="absolute w-[90vw] md:w-[60vw] h-[60vh] md:h-[70vh] bg-black border border-white/20 p-8 md:p-16 flex flex-col justify-between shadow-2xl"
-               >
-                 <div className="flex justify-between items-start">
-                    <span className="text-[10vw] md:text-[80px] font-display font-black text-[var(--brand-primary)] leading-none">
-                      {card.id}
-                    </span>
-                    <div className="w-4 h-4 bg-white rounded-full"></div>
-                 </div>
+        {/* --- SLIDE 3: 02 PROFESSIONAL (ELECTRIC BLUE) --- */}
+        <motion.div 
+          style={{ y: y3, scale: scale3 }}
+          className="absolute inset-0 w-full h-full bg-[#0056D2] flex flex-col items-center justify-center p-6 z-30 border-t border-white/10"
+        >
+           <div className="w-full max-w-6xl border-t border-white/30 pt-8">
+            <div className="flex justify-between items-end mb-10">
+               <span className="text-[15vw] leading-[0.8] font-display font-black text-white/20">02</span>
+               <div className="hidden md:block w-32 h-32 bg-white/10 backdrop-blur-md"></div>
+            </div>
+            
+            <h3 className="text-[10vw] md:text-[7vw] font-display font-black text-white uppercase leading-none mb-6">
+              {lang === 'it' ? slides[1].title_it : slides[1].title_fr}
+            </h3>
+            <p className="text-2xl md:text-4xl text-white font-light tracking-wide border-l-4 border-black pl-6">
+              {lang === 'it' ? slides[1].desc_it : slides[1].desc_fr}
+            </p>
+          </div>
+        </motion.div>
 
-                 <div>
-                   <h3 className="text-[8vw] md:text-[5vw] font-display font-bold text-white leading-none mb-4 uppercase">
-                     {card.title}
-                   </h3>
-                   <div className="h-1 w-20 bg-[var(--brand-primary)] mb-6"></div>
-                   <p className="text-xl md:text-3xl text-gray-400 font-light uppercase tracking-widest">
-                     {card.subtitle}
-                   </p>
-                 </div>
-               </motion.div>
-             );
-          })}
-        </div>
+
+        {/* --- SLIDE 4: 03 HUMAN (ELECTRIC BLUE) --- */}
+        <motion.div 
+          style={{ y: y4 }}
+          className="absolute inset-0 w-full h-full bg-[#0056D2] flex flex-col items-center justify-center p-6 z-40 border-t border-white/10"
+        >
+           <div className="w-full max-w-6xl border-t border-white/30 pt-8">
+            <div className="flex justify-between items-end mb-10">
+               <span className="text-[15vw] leading-[0.8] font-display font-black text-white/20">03</span>
+               <div className="hidden md:block w-32 h-32 rounded-full border-4 border-white/20"></div>
+            </div>
+            
+            <h3 className="text-[10vw] md:text-[7vw] font-display font-black text-white uppercase leading-none mb-6">
+              {lang === 'it' ? slides[2].title_it : slides[2].title_fr}
+            </h3>
+            <p className="text-2xl md:text-4xl text-white font-light tracking-wide border-l-4 border-black pl-6">
+              {lang === 'it' ? slides[2].desc_it : slides[2].desc_fr}
+            </p>
+          </div>
+        </motion.div>
 
       </div>
     </section>

@@ -36,27 +36,27 @@ const Contact = ({ lang }) => {
   };
 
   return (
-    <section id="contact" className="py-32 bg-[var(--bg-primary)] border-t border-white/10 overflow-hidden">
+    <section id="contact" className="py-24 md:py-32 bg-[var(--bg-primary)] border-t border-white/10 overflow-hidden">
       <div className="container mx-auto px-6 max-w-5xl">
         
-        <div className="text-center mb-24">
-          {/* Fluid Typography to prevent line break */}
-          <h2 className="text-[13vw] md:text-[10rem] font-display font-black text-white mb-2 uppercase leading-[0.8]">
+        <div className="text-center mb-16 md:mb-24">
+          {/* Responsive Text Fix: Using clamp and viewport width to ensure it fits mobile screens without breaking */}
+          <h2 className="text-[12vw] md:text-[8rem] font-display font-black text-white mb-2 uppercase leading-[0.8] w-full break-words">
             {t.title}
           </h2>
-          <p className="text-xl text-gray-400">
+          <p className="text-lg md:text-xl text-gray-400 mt-4">
             {t.subtitle}
           </p>
         </div>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-16">
-          <div className="grid md:grid-cols-2 gap-16">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-12 md:space-y-16">
+          <div className="grid md:grid-cols-2 gap-12 md:gap-16">
             <div className="group">
               <label className="block text-sm font-bold text-[var(--brand-primary)] uppercase tracking-widest mb-4">{t.name}</label>
               <motion.input 
                 {...register("name", { required: true })}
                 whileFocus={{ scale: 1.02 }}
-                className="w-full bg-transparent border-b-2 border-white/20 text-3xl md:text-4xl text-white py-4 outline-none focus:border-[var(--brand-primary)] transition-colors placeholder-white/10 font-display"
+                className="w-full bg-transparent border-b-2 border-white/20 text-2xl md:text-4xl text-white py-4 outline-none focus:border-[var(--brand-primary)] transition-colors placeholder-white/10 font-display"
                 placeholder={t.placeholderName}
               />
               {errors.name && <span className="text-red-500 text-sm mt-2">*</span>}
@@ -67,7 +67,7 @@ const Contact = ({ lang }) => {
               <motion.input 
                 {...register("email", { required: true })}
                 whileFocus={{ scale: 1.02 }}
-                className="w-full bg-transparent border-b-2 border-white/20 text-3xl md:text-4xl text-white py-4 outline-none focus:border-[var(--brand-primary)] transition-colors placeholder-white/10 font-display"
+                className="w-full bg-transparent border-b-2 border-white/20 text-2xl md:text-4xl text-white py-4 outline-none focus:border-[var(--brand-primary)] transition-colors placeholder-white/10 font-display"
                 placeholder="@..."
               />
             </div>
@@ -79,7 +79,7 @@ const Contact = ({ lang }) => {
               {...register("message", { required: true })}
               whileFocus={{ scale: 1.02 }}
               rows={3}
-              className="w-full bg-transparent border-b-2 border-white/20 text-2xl md:text-3xl text-white py-4 outline-none focus:border-[var(--brand-primary)] transition-colors placeholder-white/10 resize-none font-display"
+              className="w-full bg-transparent border-b-2 border-white/20 text-xl md:text-3xl text-white py-4 outline-none focus:border-[var(--brand-primary)] transition-colors placeholder-white/10 resize-none font-display"
               placeholder={t.placeholderMsg}
             />
           </div>
@@ -89,7 +89,7 @@ const Contact = ({ lang }) => {
             disabled={isSubmitting}
             whileHover={{ scale: 1.02, backgroundColor: "#ffffff", color: "#000000" }}
             whileTap={{ scale: 0.98 }}
-            className="w-full bg-[var(--brand-primary)] text-white py-8 text-2xl font-bold uppercase tracking-widest hover:shadow-[0_0_50px_rgba(0,86,210,0.5)] transition-all"
+            className="w-full bg-[var(--brand-primary)] text-white py-6 md:py-8 text-xl md:text-2xl font-bold uppercase tracking-widest hover:shadow-[0_0_50px_rgba(0,86,210,0.5)] transition-all"
           >
             {isSubmitting ? t.sending : t.send}
           </motion.button>

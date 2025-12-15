@@ -103,18 +103,26 @@ const Hero = ({ lang }) => {
         </div>
       </div>
       
-      {/* Scroll Marquee at Bottom - Fixed Gap */}
+      {/* Scroll Marquee at Bottom - Fixed Gap & Overlap */}
       <div className="absolute bottom-0 w-full overflow-hidden border-t border-white/10 py-4 backdrop-blur-sm">
-        <div className="flex whitespace-nowrap animate-marquee">
-          <span className="text-4xl md:text-6xl font-display font-black text-white/5 uppercase mx-10">
-             Privacy • Digital Law • Family • Cross-Border •
-          </span>
-          <span className="text-4xl md:text-6xl font-display font-black text-white/5 uppercase mx-10">
-             Privacy • Digital Law • Family • Cross-Border •
-          </span>
-           <span className="text-4xl md:text-6xl font-display font-black text-white/5 uppercase mx-10">
-             Privacy • Digital Law • Family • Cross-Border •
-          </span>
+        <div className="flex w-max animate-marquee">
+          {/* Duplicated content for seamless loop */}
+          <div className="flex gap-12 px-6">
+            <span className="text-4xl md:text-6xl font-display font-black text-white/5 uppercase">
+              Privacy • Digital Law • Family • Cross-Border •
+            </span>
+            <span className="text-4xl md:text-6xl font-display font-black text-white/5 uppercase">
+              Privacy • Digital Law • Family • Cross-Border •
+            </span>
+          </div>
+          <div className="flex gap-12 px-6">
+            <span className="text-4xl md:text-6xl font-display font-black text-white/5 uppercase">
+              Privacy • Digital Law • Family • Cross-Border •
+            </span>
+            <span className="text-4xl md:text-6xl font-display font-black text-white/5 uppercase">
+              Privacy • Digital Law • Family • Cross-Border •
+            </span>
+          </div>
         </div>
       </div>
 
