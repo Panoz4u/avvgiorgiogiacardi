@@ -44,8 +44,11 @@ const WhyChooseUs = ({ lang }) => {
             <div className="absolute inset-0 opacity-15 mix-blend-screen bg-[radial-gradient(circle_at_40%_40%,#fff,transparent_35%)]" />
             <div className="absolute inset-0 opacity-20 mix-blend-multiply bg-[radial-gradient(circle_at_80%_60%,#000,transparent_45%)]" />
 
-            <div className="relative z-10 w-full max-w-7xl text-white flex flex-col gap-4">
-              <h3 className="text-5xl md:text-7xl font-display font-black uppercase tracking-tight">
+            <div className="relative z-10 w-full max-w-7xl text-white flex flex-col gap-4 px-2 md:px-0">
+              <h3
+                className="font-display font-black uppercase tracking-tight break-words leading-[0.95]"
+                style={{ fontSize: 'clamp(2.5rem, 8vw, 6rem)' }}
+              >
                 {item.title}
               </h3>
               <p className="text-xl md:text-2xl font-light tracking-wide">

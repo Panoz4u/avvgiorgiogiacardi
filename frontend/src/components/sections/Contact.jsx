@@ -39,13 +39,14 @@ const Contact = ({ lang }) => {
     <section id="contact" className="py-24 md:py-32 bg-[var(--bg-primary)] border-t border-white/10 overflow-hidden">
       <div className="container mx-auto px-6 max-w-6xl">
         
-        <div className="text-center mb-16 md:mb-24 w-full overflow-hidden">
-          {/* Force text to fit on one line and scale down if needed */}
-          <div className="w-full">
-            <h2 className="text-[9vw] md:text-[8rem] font-display font-black text-white mb-2 uppercase leading-[0.8] w-full text-center tracking-tighter">
-              {t.title}
-            </h2>
-          </div>
+        <div className="text-center mb-16 md:mb-24 w-full px-4">
+          {/* Titolo responsive: più piccolo e sempre leggibile, anche su viewport stretti */}
+          <h2
+            className="font-display font-black text-white mb-2 uppercase leading-[0.95] w-full text-center tracking-tight whitespace-nowrap"
+            style={{ fontSize: 'clamp(1.8rem, 6vw, 4.8rem)' }}
+          >
+            {t.title}
+          </h2>
           <p className="text-lg md:text-xl text-gray-400 mt-4">
             {t.subtitle}
           </p>
