@@ -5,11 +5,11 @@
 
 ## Recent Tests
 - Date: 2025-08-XX
-- Component: Animation Revolution & Mobile Tweaks
+- Component: Animation V4 (Pixels & Parallax)
 - Status: **PASSED**
 - Notes:
-    - **"La Tua Difesa Senza Confini":** Successfully implemented scroll-driven animation (Sticky + Transform). 
-        - Title fades out -> Squares grid scales up (Navy to Electric Blue) -> Cards (01, 02, 03) fly in from bottom.
-    - **Footer:** Big "GIACARDI" text with rotating "Avvocato Giorgio Giacardi" implemented via SVG textPath.
-    - **Monviso:** Text removed, video slowed to 0.3x via React Ref.
-    - **Contact:** Mobile font size for "Parliamone" fixed (`text-4xl md:text-8xl`).
+    - **"Why Us"**: Implemented "Big Pixel Grid" animation. The grid scales up and fades in, creating a transition from Navy to Electric Blue.
+    - **Cards Stack**: The 3 cards (01, 02, 03) now parallax stack on top of each other after the pixel transition.
+    - **Contact**: Fixed mobile font size using fluid `text-[13vw]` and translated all form labels.
+    - **Footer**: Reverted to huge Marquee background as requested ("Avvocato Giorgio Giacardi" scrolling slowly). Links stay on top.
+    - **Hero**: Fixed ticker overlap by ensuring flex container and proper spacing/duplication.
