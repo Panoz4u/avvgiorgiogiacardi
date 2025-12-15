@@ -37,11 +37,11 @@ const Contact = ({ lang }) => {
 
   return (
     <section id="contact" className="py-24 md:py-32 bg-[var(--bg-primary)] border-t border-white/10 overflow-hidden">
-      <div className="container mx-auto px-6 max-w-5xl">
+      <div className="container mx-auto px-6 max-w-6xl">
         
-        <div className="text-center mb-16 md:mb-24">
-          {/* Responsive Text Fix: Using clamp and viewport width to ensure it fits mobile screens without breaking */}
-          <h2 className="text-[12vw] md:text-[8rem] font-display font-black text-white mb-2 uppercase leading-[0.8] w-full break-words">
+        <div className="text-center mb-16 md:mb-24 w-full overflow-hidden">
+          {/* Force text to fit on one line and scale down if needed */}
+          <h2 className="text-[15vw] md:text-[10rem] font-display font-black text-white mb-2 uppercase leading-[0.8] whitespace-nowrap">
             {t.title}
           </h2>
           <p className="text-lg md:text-xl text-gray-400 mt-4">
