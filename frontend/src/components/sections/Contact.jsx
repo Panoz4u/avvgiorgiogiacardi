@@ -41,9 +41,11 @@ const Contact = ({ lang }) => {
         
         <div className="text-center mb-16 md:mb-24 w-full overflow-hidden">
           {/* Force text to fit on one line and scale down if needed */}
-          <h2 className="text-[11vw] md:text-[10rem] font-display font-black text-white mb-2 uppercase leading-[0.8] whitespace-nowrap overflow-hidden text-ellipsis w-full">
-            {t.title}
-          </h2>
+          <div className="w-full">
+            <h2 className="text-[9vw] md:text-[8rem] font-display font-black text-white mb-2 uppercase leading-[0.8] w-full text-center tracking-tighter">
+              {t.title}
+            </h2>
+          </div>
           <p className="text-lg md:text-xl text-gray-400 mt-4">
             {t.subtitle}
           </p>
