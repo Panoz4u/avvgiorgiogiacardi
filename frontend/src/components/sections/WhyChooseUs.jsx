@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
 const WhyChooseUs = ({ lang }) => {
@@ -8,121 +8,125 @@ const WhyChooseUs = ({ lang }) => {
     offset: ["start start", "end end"]
   });
 
-  // PHASES
-  // 0.0 -> 0.25: Title Static -> Fade Out
-  // 0.25 -> 0.50: Squares Animation (Navy -> Electric Blue)
-  // 0.50 -> 1.00: Cards Sequence (01, 02, 03)
+  // Animation Phases
+  // 0.0 - 0.2: Title Fade Out
+  // 0.2 - 0.4: Pixel Grid Animation (Navy -> Electric Blue)
+  // 0.4 - 1.0: Cards Parallax Stack
 
-  const titleOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
-  const titleScale = useTransform(scrollYProgress, [0, 0.2], [1, 0.8]);
+  const titleOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
+  const gridOpacity = useTransform(scrollYProgress, [0.15, 0.3], [0, 1]);
+  const gridScale = useTransform(scrollYProgress, [0.15, 0.4], [0.5, 1.2]); // Zoom effect
   
-  const squaresOpacity = useTransform(scrollYProgress, [0.2, 0.3, 0.5], [0, 1, 0]);
-  const squaresScale = useTransform(scrollYProgress, [0.2, 0.5], [0.5, 1.5]);
-  const bgTransition = useTransform(scrollYProgress, [0.25, 0.45], ["#050A14", "#0056D2"]);
-
-  // Card Transforms
-  const card1Y = useTransform(scrollYProgress, [0.5, 0.6], ["100vh", "0vh"]);
-  const card2Y = useTransform(scrollYProgress, [0.65, 0.75], ["100vh", "0vh"]);
-  const card3Y = useTransform(scrollYProgress, [0.8, 0.9], ["100vh", "0vh"]);
+  // Dynamic Background Color for the whole section
+  const bgColor = useTransform(
+    scrollYProgress, 
+    [0.2, 0.4], 
+    ["#050A14", "#0056D2"] // Navy -> Electric Blue
+  );
 
   const content = [
     {
       id: "01",
-      title_it: "International",
-      title_fr: "International",
-      desc_it: "Expertise IT/FR",
-      desc_fr: "Expertise IT/FR"
+      title: "International",
+      subtitle: "Expertise IT/FR"
     },
     {
       id: "02",
-      title_it: "Professionalità",
-      title_fr: "Professionnalisme",
-      desc_it: "Disponibilità & Competenza",
-      desc_fr: "Disponibilité & Compétence"
+      title: lang === 'it' ? "Professionalità" : "Professionnalisme",
+      subtitle: lang === 'it' ? "Disponibilità & Competenza" : "Disponibilité & Compétence"
     },
     {
       id: "03",
-      title_it: "Human Centric",
-      title_fr: "Centré sur l'Humain",
-      desc_it: "Empathy & Strategy",
-      desc_fr: "Empathie & Stratégie"
+      title: "Human Centric",
+      subtitle: "Empathy & Strategy"
     }
   ];
 
   return (
-    <section ref={containerRef} className="relative h-[400vh] bg-[var(--bg-primary)]">
+    <section ref={containerRef} className="relative h-[400vh] bg-[var(--bg-primary)] overflow-hidden">
       
-      {/* Sticky Container */}
-      <div className="sticky top-0 h-screen overflow-hidden flex flex-col items-center justify-center">
+      {/* Sticky Viewport */}
+      <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col items-center justify-center">
         
-        {/* Dynamic Background */}
+        {/* Animated Background Layer */}
         <motion.div 
-          className="absolute inset-0 z-0"
-          style={{ backgroundColor: bgTransition }}
+          className="absolute inset-0 z-0 transition-colors duration-0"
+          style={{ backgroundColor: bgColor }}
         />
 
-        {/* Phase 1: Main Title */}
+        {/* Phase 1: Intro Title */}
         <motion.div 
-          style={{ opacity: titleOpacity, scale: titleScale }}
-          className="absolute z-10 text-center px-4"
+          style={{ opacity: titleOpacity }}
+          className="absolute z-10 text-center px-4 w-full"
         >
-          <h2 className="text-5xl md:text-8xl font-display font-black text-white leading-tight uppercase">
+          <h2 className="text-[8vw] md:text-[6vw] font-display font-black text-white leading-[0.9] uppercase">
             {lang === 'it' ? 'LA TUA DIFESA,' : 'VOTRE DÉFENSE,'} <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--brand-primary)] to-white">
+            <span className="text-white/50">
               {lang === 'it' ? 'SENZA CONFINI.' : 'SANS FRONTIÈRES.'}
             </span>
           </h2>
         </motion.div>
 
-        {/* Phase 2: Animated Squares (Transition) */}
+        {/* Phase 2: Big Pixel Grid */}
         <motion.div 
-          style={{ opacity: squaresOpacity, scale: squaresScale }}
-          className="absolute z-20 inset-0 flex items-center justify-center pointer-events-none"
+          style={{ opacity: gridOpacity, scale: gridScale }}
+          className="absolute inset-0 z-10 grid grid-cols-4 md:grid-cols-6 grid-rows-6 gap-1 pointer-events-none"
         >
-          <div className="grid grid-cols-3 gap-4 w-full h-full p-20 opacity-50">
-             {[...Array(9)].map((_, i) => (
-               <motion.div 
-                 key={i}
-                 initial={{ opacity: 0, scale: 0 }}
-                 whileInView={{ opacity: 1, scale: 1 }}
-                 transition={{ delay: i * 0.1, duration: 0.5 }}
-                 className="bg-white/10 backdrop-blur-md border border-white/20 rounded-lg"
-               />
-             ))}
-          </div>
+           {[...Array(36)].map((_, i) => (
+             <motion.div
+               key={i}
+               className="bg-[#0056D2] border border-white/10"
+               initial={{ opacity: 0 }}
+               whileInView={{ 
+                 opacity: [0, 1, 0.8],
+                 backgroundColor: ["#050A14", "#0056D2", "#004bb5"]
+               }}
+               transition={{ 
+                 duration: 1, 
+                 delay: i * 0.02, 
+                 repeat: Infinity, 
+                 repeatType: "reverse" 
+               }}
+             />
+           ))}
         </motion.div>
 
         {/* Phase 3: Cards Stack */}
-        <div className="absolute z-30 inset-0 flex items-center justify-center pointer-events-none">
-           {/* Card 01 */}
-           <motion.div 
-             style={{ y: card1Y }}
-             className="absolute w-[90vw] md:w-[600px] h-[70vh] bg-[var(--bg-secondary)] border border-white/10 p-12 flex flex-col justify-center items-center text-center shadow-2xl shadow-black/50"
-           >
-             <span className="text-[150px] font-display font-bold text-[var(--brand-primary)] opacity-20 absolute top-[-20px] left-[-20px]">01</span>
-             <h3 className="text-5xl md:text-6xl font-display font-bold text-white mb-4 uppercase">{lang === 'it' ? content[0].title_it : content[0].title_fr}</h3>
-             <p className="text-2xl text-gray-400 font-light">{lang === 'it' ? content[0].desc_it : content[0].desc_fr}</p>
-           </motion.div>
+        <div className="absolute z-20 w-full h-full flex items-center justify-center pointer-events-none">
+          {content.map((card, i) => {
+             // Calculate entrance per card
+             const start = 0.4 + (i * 0.2);
+             const end = start + 0.15;
+             // Use hooks unconditionally, logic inside transform
+             const y = useTransform(scrollYProgress, [start, end], ["150vh", "0vh"]);
+             const scale = useTransform(scrollYProgress, [end, end + 0.2], [1, 0.9]);
+             const opacity = useTransform(scrollYProgress, [end, end + 0.2], [1, 0]);
 
-           {/* Card 02 */}
-           <motion.div 
-             style={{ y: card2Y }}
-             className="absolute w-[90vw] md:w-[600px] h-[70vh] bg-[#0a0f1d] border border-white/10 p-12 flex flex-col justify-center items-center text-center shadow-2xl shadow-black/50"
-           >
-             <span className="text-[150px] font-display font-bold text-[var(--brand-primary)] opacity-20 absolute top-[-20px] left-[-20px]">02</span>
-             <h3 className="text-5xl md:text-6xl font-display font-bold text-white mb-4 uppercase">{lang === 'it' ? content[1].title_it : content[1].title_fr}</h3>
-             <p className="text-2xl text-gray-400 font-light">{lang === 'it' ? content[1].desc_it : content[1].desc_fr}</p>
-           </motion.div>
+             return (
+               <motion.div
+                 key={i}
+                 style={{ y, scale, opacity }}
+                 className="absolute w-[90vw] md:w-[60vw] h-[60vh] md:h-[70vh] bg-black border border-white/20 p-8 md:p-16 flex flex-col justify-between shadow-2xl"
+               >
+                 <div className="flex justify-between items-start">
+                    <span className="text-[10vw] md:text-[80px] font-display font-black text-[var(--brand-primary)] leading-none">
+                      {card.id}
+                    </span>
+                    <div className="w-4 h-4 bg-white rounded-full"></div>
+                 </div>
 
-           {/* Card 03 */}
-           <motion.div 
-             style={{ y: card3Y }}
-             className="absolute w-[90vw] md:w-[600px] h-[70vh] bg-[var(--brand-primary)] border border-white/10 p-12 flex flex-col justify-center items-center text-center shadow-2xl shadow-black/50"
-           >
-             <span className="text-[150px] font-display font-bold text-white opacity-20 absolute top-[-20px] left-[-20px]">03</span>
-             <h3 className="text-5xl md:text-6xl font-display font-bold text-white mb-4 uppercase">{lang === 'it' ? content[2].title_it : content[2].title_fr}</h3>
-             <p className="text-2xl text-white/80 font-light">{lang === 'it' ? content[2].desc_it : content[2].desc_fr}</p>
-           </motion.div>
+                 <div>
+                   <h3 className="text-[8vw] md:text-[5vw] font-display font-bold text-white leading-none mb-4 uppercase">
+                     {card.title}
+                   </h3>
+                   <div className="h-1 w-20 bg-[var(--brand-primary)] mb-6"></div>
+                   <p className="text-xl md:text-3xl text-gray-400 font-light uppercase tracking-widest">
+                     {card.subtitle}
+                   </p>
+                 </div>
+               </motion.div>
+             );
+          })}
         </div>
 
       </div>

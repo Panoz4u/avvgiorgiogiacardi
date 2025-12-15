@@ -103,14 +103,18 @@ const Hero = ({ lang }) => {
         </div>
       </div>
       
-      {/* Scroll Marquee at Bottom */}
+      {/* Scroll Marquee at Bottom - Fixed Gap */}
       <div className="absolute bottom-0 w-full overflow-hidden border-t border-white/10 py-4 backdrop-blur-sm">
-        <div className="whitespace-nowrap animate-marquee flex gap-10">
-          {[1,2,3,4,5,6].map((i) => (
-             <span key={i} className="text-4xl md:text-6xl font-display font-black text-white/5 uppercase">
-               Privacy • Digital Law • Family • Cross-Border •
-             </span>
-          ))}
+        <div className="flex whitespace-nowrap animate-marquee">
+          <span className="text-4xl md:text-6xl font-display font-black text-white/5 uppercase mx-10">
+             Privacy • Digital Law • Family • Cross-Border •
+          </span>
+          <span className="text-4xl md:text-6xl font-display font-black text-white/5 uppercase mx-10">
+             Privacy • Digital Law • Family • Cross-Border •
+          </span>
+           <span className="text-4xl md:text-6xl font-display font-black text-white/5 uppercase mx-10">
+             Privacy • Digital Law • Family • Cross-Border •
+          </span>
         </div>
       </div>
 
