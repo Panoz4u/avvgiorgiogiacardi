@@ -42,8 +42,13 @@ const About = ({ lang }) => {
             <h2 className="text-5xl md:text-7xl font-display font-black leading-[0.9] mb-8 text-white">
               {t.subtitle}
             </h2>
-            <p className="text-xl md:text-2xl text-gray-400 font-light leading-relaxed max-w-lg">
+            <p className="text-xl md:text-2xl text-gray-400 font-light leading-relaxed max-w-lg mb-6">
               {t.desc}
+            </p>
+            <p className="text-lg text-gray-500 font-light leading-relaxed max-w-lg">
+              {lang === 'it'
+                ? 'Con una visione europea e una presenza fisica su entrambi i lati delle Alpi, garantisco assistenza completa e personalizzata.'
+                : 'Avec une vision européenne et une présence physique des deux côtés des Alpes, je garantis une assistance complète et personnalisée.'}
             </p>
 
             <div className="flex gap-12 mt-16">
@@ -56,40 +61,43 @@ const About = ({ lang }) => {
             </div>
           </motion.div>
 
-          {/* Video / Visual Block */}
-          <motion.div 
-            initial={{ scale: 0.9, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="relative h-[600px] w-full bg-[#0a0f1d] border border-white/5 overflow-hidden group"
-          >
-             {/* Profile Video Background */}
-             <div className="absolute inset-0 w-full h-full">
-               <video 
-                 autoPlay 
-                 loop 
-                 muted 
-                 playsInline
-                 className="w-full h-full object-cover"
-               >
-                 <source src="https://customer-assets.emergentagent.com/job_alpine-attorney/artifacts/k2kbkaa8_grok-video-a598e25c-a974-4d38-af49-1ee62690fd2d.mp4" type="video/mp4" />
-               </video>
-             </div>
+          {/* Video / Visual Block - 9:16 Format */}
+          <div className="flex justify-center items-start">
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              whileInView={{ scale: 1, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="relative w-[350px] h-[622px] bg-[#0a0f1d] border border-white/5 overflow-hidden group"
+              style={{ aspectRatio: '9/16' }}
+            >
+               {/* Profile Video Background */}
+               <div className="absolute inset-0 w-full h-full">
+                 <video
+                   autoPlay
+                   loop
+                   muted
+                   playsInline
+                   className="w-full h-full object-cover object-top"
+                 >
+                   <source src="https://www.panoz4u.com/gg04/assets/gg.mp4" type="video/mp4" />
+                 </video>
+               </div>
 
-             {/* Blue Opacity Overlay */}
-             <div className="absolute inset-0 bg-[var(--brand-primary)]/40 mix-blend-multiply opacity-80 group-hover:opacity-60 transition-opacity duration-500"></div>
+               {/* Blue Navy Opacity Overlay - 50% */}
+               <div className="absolute inset-0 bg-[#001f3f] opacity-50"></div>
              
              {/* GG Text Overlay */}
-             <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-[200px] font-display font-black text-white/20 group-hover:text-white/40 transition-colors duration-500 select-none">
+             <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
+                <span className="text-[100px] font-display font-black text-white/20 group-hover:text-white/40 transition-colors duration-500 select-none">
                   GG
                 </span>
              </div>
              
-             {/* Decorative Lines */}
-             <div className="absolute bottom-0 left-0 w-full h-1 bg-[var(--brand-primary)] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-700"></div>
-          </motion.div>
+               {/* Decorative Lines */}
+               <div className="absolute bottom-0 left-0 w-full h-1 bg-[var(--brand-primary)] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-700"></div>
+            </motion.div>
+          </div>
 
         </div>
       </div>

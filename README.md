@@ -52,6 +52,8 @@ npm start
 
 ### Production Build
 
+The site is configured to run from the `gg04` subdirectory (via the `homepage` value in `frontend/package.json`). Update this value or set `PUBLIC_URL` if deploying elsewhere.
+
 ```bash
 # Build the application
 npm run build
