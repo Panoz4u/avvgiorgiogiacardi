@@ -21,7 +21,7 @@ function App() {
       <main>
         <Hero lang={lang} />
         <About lang={lang} />
-        <Monviso />
+        <Monviso lang={lang} />
         <PracticeAreas lang={lang} />
         <WhyChooseUs lang={lang} />
         <Locations lang={lang} />

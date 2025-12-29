@@ -1,8 +1,17 @@
 import React, { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
-const Monviso = () => {
+const Monviso = ({ lang }) => {
   const videoRef = useRef(null);
+
+  const t = {
+    it: {
+      translation: "Non dare danno ad alcuno, dare a ciascuno il suo, vivere onestamente"
+    },
+    fr: {
+      translation: "Ne léser personne, attribuer à chacun ce qui lui revient, vivre honorablement."
+    }
+  }[lang];
 
   useEffect(() => {
     if (videoRef.current) {
@@ -14,17 +23,17 @@ const Monviso = () => {
     <section className="relative h-[80vh] flex items-center justify-center overflow-hidden">
       {/* Background Video Loop */}
       <div className="absolute inset-0 w-full h-full overflow-hidden">
-        <video 
+        <video
           ref={videoRef}
-          autoPlay 
-          loop 
-          muted 
+          autoPlay
+          loop
+          muted
           playsInline
           className="w-full h-full object-cover transform scale-105"
         >
           <source src="https://customer-assets.emergentagent.com/job_alpine-attorney/artifacts/1h1v43ms_grok-video-5ae07105-f1a1-4c45-bb81-b5082e83fc65.mp4" type="video/mp4" />
         </video>
-        
+
         {/* Dark Overlays for Text Legibility */}
         <div className="absolute inset-0 bg-black/40 mix-blend-multiply"></div>
         <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-primary)] via-transparent to-[var(--bg-primary)]"></div>
@@ -39,11 +48,12 @@ const Monviso = () => {
           className="border-l-4 border-[var(--brand-primary)] pl-8 md:pl-12 text-left max-w-4xl mx-auto backdrop-blur-sm bg-black/20 p-8"
         >
           <h2 className="text-4xl md:text-6xl font-display font-bold text-white mb-4 leading-tight">
-            "Fiat iustitia,<br />
-            <span className="text-[var(--brand-primary)]">ruat caelum"</span>
+            "Neminem laedere,<br />
+            unicuique suum tribuere,<br />
+            <span className="text-[var(--brand-primary)]">honeste vivere"</span>
           </h2>
           <p className="mt-4 text-white text-xl md:text-2xl font-serif italic">
-             "Sia fatta giustizia, anche se cadesse il cielo"
+             "{t.translation}"
           </p>
         </motion.div>
       </div>

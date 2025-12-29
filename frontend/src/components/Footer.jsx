@@ -26,6 +26,7 @@ const Footer = () => {
           <div className="flex flex-col gap-4 text-right">
             <a href="https://www.linkedin.com/in/giorgio-giacardi-67ba295a/" target="_blank" rel="noopener noreferrer" className="text-3xl md:text-5xl font-display font-black text-white hover:text-[var(--brand-primary)] transition-colors">LINKEDIN</a>
             <a href="mailto:avvgiorgiogiacardi@gmail.com" className="text-3xl md:text-5xl font-display font-black text-white hover:text-[var(--brand-primary)] transition-colors">EMAIL</a>
+            <a href="https://www.panoz4u.com/gg04/download/AvvGiorgioGiacardi_CV.pdf" target="_blank" rel="noopener noreferrer" className="text-3xl md:text-5xl font-display font-black text-white hover:text-[var(--brand-primary)] transition-colors">CV</a>
           </div>
         </div>
       </div>

@@ -2,13 +2,17 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { motion } from 'framer-motion';
-import axios from 'axios';
+import emailjs from '@emailjs/browser';
 
 const Contact = ({ lang }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
-  
-  const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
+
+  // EmailJS Configuration
+  // NOTA: Queste credenziali devono essere configurate su https://www.emailjs.com/
+  const EMAILJS_SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID';
+  const EMAILJS_TEMPLATE_ID = process.env.REACT_APP_EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID';
+  const EMAILJS_PUBLIC_KEY = process.env.REACT_APP_EMAILJS_PUBLIC_KEY || 'YOUR_PUBLIC_KEY';
 
   const t = {
     title: lang === 'it' ? 'PARLIAMONE' : 'PARLONS-EN',
@@ -25,11 +29,28 @@ const Contact = ({ lang }) => {
   const onSubmit = async (data) => {
     setIsSubmitting(true);
     try {
-      await axios.post(`${BACKEND_URL}/api/contact`, { ...data, lang });
-      toast.success(lang === 'it' ? "Messaggio Inviato" : "Message Envoyé");
+      // Prepara i dati per EmailJS
+      const templateParams = {
+        from_name: data.name,
+        from_email: data.email,
+        message: data.message,
+        to_email: 'avvgiorgiogiacardi@gmail.com',
+        lang: lang
+      };
+
+      // Invia email tramite EmailJS
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        templateParams,
+        EMAILJS_PUBLIC_KEY
+      );
+
+      toast.success(lang === 'it' ? "Messaggio Inviato con successo!" : "Message Envoyé avec succès!");
       reset();
     } catch (error) {
-      toast.error("Error");
+      console.error('EmailJS Error:', error);
+      toast.error(lang === 'it' ? "Errore nell'invio. Riprova." : "Erreur d'envoi. Réessayez.");
     } finally {
       setIsSubmitting(false);
     }

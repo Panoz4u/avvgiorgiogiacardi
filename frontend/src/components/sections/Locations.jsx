@@ -26,6 +26,7 @@ const Locations = ({ lang }) => {
             <div className="mt-10 border-t border-white/10 pt-8">
               <p className="text-2xl text-gray-300 font-light">Trinità (Cuneo)</p>
               <p className="text-gray-500 mt-2">Via Stazione 32</p>
+              <p className="text-2xl text-gray-300 font-light">+39 347 243 9918</p>
               <motion.a 
                 href="https://share.google/JLiYCPUmPk0BX7KAz"
                 target="_blank"
@@ -46,12 +47,13 @@ const Locations = ({ lang }) => {
             <div>
               <span className="text-6xl font-display font-bold text-white/10 group-hover:text-white/30 transition-colors">FR</span>
               <h3 className="text-4xl font-bold text-white mt-4">FRANCE</h3>
-              <p className="text-[var(--brand-primary)] text-xl mt-2">Paris Office</p>
+              <p className="text-[var(--brand-primary)] text-xl mt-2">Paris</p>
             </div>
             
             <div className="mt-10 border-t border-white/10 pt-8">
               <p className="text-2xl text-gray-300 font-light">Paris (75019)</p>
               <p className="text-gray-500 mt-2">20 Rue Manin</p>
+              <p className="text-2xl text-gray-300 font-light">+39 347 243 9918</p>
               <motion.a 
                 href="https://share.google/N0mDgUICZD7DOIrja"
                 target="_blank"

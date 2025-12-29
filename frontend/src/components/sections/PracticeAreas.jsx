@@ -9,8 +9,8 @@ const PracticeAreas = ({ lang }) => {
     { 
       title: "Privacy & Digital", 
       desc: "GDPR, Diritto all'Oblio, Eredità Digitale",
-      details_it: "Tutela della reputazione online, rimozione contenuti lesivi, gestione dell'eredità digitale (account, crypto, asset virtuali) e compliance GDPR per aziende transfrontaliere.",
-      details_fr: "Protection de la réputation en ligne, suppression de contenu préjudiciable, gestion de l'héritage numérique et conformité RGPD."
+      details_it: "Tutela della reputazione online, rimozione contenuti lesivi, gestione dell'eredità digitale (account, crypto, asset virtuali) e compliance GDPR per aziende italiane e transfrontaliere.",
+      details_fr: "Protection de la réputation en ligne, suppression de contenus préjudiciables, gestion de l’héritage numérique (comptes, cryptomonnaies, actifs virtuels) et conformité au RGPD pour les entreprises italiennes et transfrontalières."
     },
     { 
       title: "Family Law", 
@@ -27,20 +27,20 @@ const PracticeAreas = ({ lang }) => {
     { 
       title: "Civil Rights", 
       desc: "Responsabilità, Contratti, Danni",
-      details_it: "Diritto civile puro: responsabilità contrattuale ed extracontrattuale, risarcimento danni, recupero crediti e stesura contratti blindati.",
-      details_fr: "Droit civil pur : responsabilité contractuelle et délictuelle, indemnisation des dommages, recouvrement de créances."
+      details_it: "Diritto civile puro: responsabilità contrattuale ed extracontrattuale, risarcimento danni, recupero crediti e stesura contratti.",
+      details_fr: "Droit civil pur : responsabilité contractuelle et extracontractuelle, indemnisation des dommages, recouvrement de créances et rédaction de contrats."
     },
     { 
       title: "Real Estate", 
       desc: "Urbanistica, Compravendite Internazionali",
-      details_it: "Diritto amministrativo e urbanistico. Assistenza completa nelle compravendite immobiliari di lusso tra Italia e Francia.",
-      details_fr: "Droit administratif et urbanisme. Assistance complète dans les transactions immobilières de luxe entre l'Italie et la France."
+      details_it: "Diritto amministrativo e urbanistico. Assistenza completa nelle compravendite immobiliari tra Italia e Francia.",
+      details_fr: "Droit administratif et urbanisme. Assistance complète dans les transactions immobilières entre l'Italie et la France."
     },
     { 
       title: "Corporate", 
       desc: "Contrattualistica d'Impresa",
-      details_it: "Supporto legale alle aziende per espansione estera, compliance normativa, fusioni, acquisizioni e tutela del brand.",
-      details_fr: "Support juridique aux entreprises pour l'expansion étrangère, la conformité réglementaire, les fusions et acquisitions."
+      details_it: "Supporto legale alle aziende per espansione all'estero e compliance normativa.",
+      details_fr: "Accompagnement juridique des entreprises pour leur expansion à l’international et la conformité réglementaire."
     }
   ];
 

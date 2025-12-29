@@ -26,7 +26,7 @@ const Hero = ({ lang }) => {
             className="mb-6 overflow-hidden"
           >
             <span className="inline-block px-4 py-1 border border-white/20 rounded-full text-xs md:text-sm font-bold tracking-[0.2em] uppercase text-blue-300 backdrop-blur-sm">
-              {lang === 'it' ? 'Studio Legale Internazionale' : 'Cabinet d\'Avocats International'}
+              {lang === 'it' ? 'AVVOCATO' : 'Avocat'}
             </span>
           </motion.div>
 
