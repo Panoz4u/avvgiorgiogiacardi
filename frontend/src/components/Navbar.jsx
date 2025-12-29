@@ -56,14 +56,14 @@ const Navbar = ({ lang, setLang }) => {
               </motion.a>
             ))}
             
-            <motion.button 
+            <motion.button
               whileHover={{ scale: 1.1, backgroundColor: "rgba(255,255,255,0.1)" }}
               whileTap={{ scale: 0.9 }}
               onClick={() => setLang(lang === 'it' ? 'fr' : 'it')}
               className="flex items-center gap-2 text-xs font-bold text-white border border-white/20 px-4 py-2 rounded-full uppercase tracking-widest"
             >
               <Globe size={14} />
-              {lang === 'it' ? 'IT' : 'FR'}
+              {lang === 'it' ? 'FR' : 'IT'}
             </motion.button>
           </div>
 
@@ -100,7 +100,7 @@ const Navbar = ({ lang, setLang }) => {
                 {link.name}
               </motion.a>
             ))}
-             <motion.button 
+             <motion.button
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6 }}
@@ -111,7 +111,7 @@ const Navbar = ({ lang, setLang }) => {
               className="mt-8 flex items-center gap-3 text-xl font-bold text-[var(--brand-primary)] border border-[var(--brand-primary)] px-6 py-3 rounded-full"
             >
               <Globe size={24} />
-              Switch Language
+              {lang === 'it' ? 'Français' : 'Italiano'}
             </motion.button>
           </motion.div>
         )}

@@ -15,7 +15,7 @@ const Monviso = ({ lang }) => {
 
   useEffect(() => {
     if (videoRef.current) {
-      videoRef.current.playbackRate = 0.3; // 0.3x speed
+      videoRef.current.playbackRate = 1; // 1x speed
     }
   }, []);
 
@@ -31,7 +31,7 @@ const Monviso = ({ lang }) => {
           playsInline
           className="w-full h-full object-cover transform scale-105"
         >
-          <source src="https://customer-assets.emergentagent.com/job_alpine-attorney/artifacts/1h1v43ms_grok-video-5ae07105-f1a1-4c45-bb81-b5082e83fc65.mp4" type="video/mp4" />
+          <source src="https://www.panoz4u.com/gg04/assets/alps.mp4" type="video/mp4" />
         </video>
 
         {/* Dark Overlays for Text Legibility */}

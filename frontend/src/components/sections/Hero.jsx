@@ -103,21 +103,12 @@ const Hero = ({ lang }) => {
         </div>
       </div>
       
-      {/* Scroll Marquee at Bottom - Fixed with strict single line */}
-      <div className="absolute bottom-0 w-full border-t border-white/10 py-4 backdrop-blur-sm overflow-hidden flex">
-        <div className="flex animate-marquee whitespace-nowrap min-w-full">
-           <span className="text-4xl md:text-6xl font-display font-black text-white/5 uppercase px-8">
-             Privacy • Digital Law • Family • Cross-Border •
-           </span>
-           <span className="text-4xl md:text-6xl font-display font-black text-white/5 uppercase px-8">
-             Privacy • Digital Law • Family • Cross-Border •
-           </span>
-           <span className="text-4xl md:text-6xl font-display font-black text-white/5 uppercase px-8">
-             Privacy • Digital Law • Family • Cross-Border •
-           </span>
-           <span className="text-4xl md:text-6xl font-display font-black text-white/5 uppercase px-8">
-             Privacy • Digital Law • Family • Cross-Border •
-           </span>
+      {/* Scroll Marquee at Bottom */}
+      <div className="absolute bottom-0 w-full border-t border-white/10 py-4 backdrop-blur-sm overflow-hidden">
+        <div className="whitespace-nowrap animate-marquee inline-block">
+          <span className="text-4xl md:text-6xl font-display font-black text-white/5 uppercase inline-block">
+            Privacy • Digital Law • Family • Cross-Border • Privacy • Digital Law • Family • Cross-Border • Privacy • Digital Law • Family • Cross-Border • Privacy • Digital Law • Family • Cross-Border •
+          </span>
         </div>
       </div>
 
