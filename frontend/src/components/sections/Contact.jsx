@@ -12,6 +12,7 @@ const Contact = ({ lang }) => {
   // NOTA: Queste credenziali devono essere configurate su https://www.emailjs.com/
   const EMAILJS_SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID';
   const EMAILJS_TEMPLATE_ID = process.env.REACT_APP_EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID';
+  const EMAILJS_TEMPLATE_AUTOREPLY_ID = process.env.REACT_APP_EMAILJS_TEMPLATE_AUTOREPLY_ID || 'YOUR_AUTOREPLY_TEMPLATE_ID';
   const EMAILJS_PUBLIC_KEY = process.env.REACT_APP_EMAILJS_PUBLIC_KEY || 'YOUR_PUBLIC_KEY';
 
   const t = {
@@ -31,17 +32,23 @@ const Contact = ({ lang }) => {
     try {
       // Prepara i dati per EmailJS
       const templateParams = {
-        from_name: data.name,
-        from_email: data.email,
-        message: data.message,
-        to_email: 'avvgiorgiogiacardi@gmail.com',
-        lang: lang
+        name: data.name,
+        email: data.email,
+        message: data.message
       };
 
-      // Invia email tramite EmailJS
+      // 1. Invia email principale all'avvocato
       await emailjs.send(
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
+        templateParams,
+        EMAILJS_PUBLIC_KEY
+      );
+
+      // 2. Invia auto-reply al cliente
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_AUTOREPLY_ID,
         templateParams,
         EMAILJS_PUBLIC_KEY
       );

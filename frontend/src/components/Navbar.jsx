@@ -17,7 +17,7 @@ const Navbar = ({ lang, setLang }) => {
   const navLinks = [
     { name: lang === 'it' ? 'Chi Sono' : 'Profil', href: '#about' },
     { name: lang === 'it' ? 'Aree' : 'Domaines', href: '#areas' },
-    { name: lang === 'it' ? 'Studio' : 'Cabinet', href: '#why-us' },
+    { name: lang === 'it' ? 'Studio' : 'Cabinet', href: '#locations' },
     { name: lang === 'it' ? 'Contatti' : 'Contact', href: '#contact' },
   ];
 
